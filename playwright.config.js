@@ -11,8 +11,9 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   fullyParallel: true,
   // Each page is a full 3D browser. Several at once ran this PC out of memory (Windows refused new processes:
-  // 0xC0000142, "Target crashed"), so locally they run one at a time. E2E_WORKERS=3 overrides.
-  workers: Number(process.env.E2E_WORKERS) || (process.env.CI ? 2 : 1),
+  // 0xC0000142, "Target crashed"), and on a GitHub runner two software-WebGL tests at once starved the
+  // multi-browser specs into timeouts. So they run one at a time everywhere; E2E_WORKERS=3 overrides.
+  workers: Number(process.env.E2E_WORKERS) || 1,
   retries: 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {

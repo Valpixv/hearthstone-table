@@ -1,0 +1,17 @@
+{
+  "_note": "Battle gesture tuning (design/vr-hands-plan.md \u00a75). Metres, seconds, m/s. tools/tune-gestures.mjs rewrites this from recorded Gesture Lab samples.",
+  "extendRatio": 1.55,
+  "curlRatio": 1.25,
+  "thumbOut": 0.045,
+  "thumbIn": 0.03,
+  "pinchGuard": 0.04,
+  "hold": 0.25,
+  "flickSpeed": 1.0,
+  "pushSpeed": 0.8,
+  "slashSpeed": 1.1,
+  "slashBias": 1.2,
+  "aimKeep": 0.5,
+  "triggerWindow": 0.35,
+  "cooldown": 0.6,
+  "historyN": 4
+}

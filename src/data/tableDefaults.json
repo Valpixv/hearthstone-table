@@ -1,0 +1,58 @@
+{
+  "_note": "What a new table starts with (design/completion-plan.md §10): classic D&D by default, every switch changeable on the Table tab. strikes: the call → roll → confirm → gesture loop. arena: where life-size creatures may stand. voice / poses: multiplayer presence.",
+  "settings": {
+    "rulesAssist": true,
+    "abilityMethods": { "roll": true, "array": true, "buy": true },
+    "gestureRelease": true,
+    "autoReleaseMonsters": false,
+    "linkMiniToBody": true,
+    "lockEnemyMinis": true,
+    "showDcToPlayers": false,
+    "gridSnap": true
+  },
+  "strikes": {
+    "timeoutMs": 30000,
+    "minImpactDelay": 0.35,
+    "aimAssistDeg": 35,
+    "defaultEffect": "weapon-strike",
+    "healEffect": "healing-light",
+    "byDamageType": {
+      "fire": "fireball", "cold": "ice-shard", "acid": "acid-orb", "lightning": "lightning-bolt", "thunder": "sonic-shout", "poison": "poison-spray",
+      "radiant": "radiant-beam", "necrotic": "necrotic-ray", "psychic": "eldritch-blast", "force": "magic-missile",
+      "bludgeoning": "heavy-strike", "piercing": "arrow-shot", "slashing": "weapon-strike"
+    }
+  },
+  "arena": {
+    "minRadius": 1.7,
+    "maxRadius": 8,
+    "seatClearance": 0.95,
+    "firePos": [0, -2.6],
+    "fireClearance": 0.9,
+    "gap": 0.25,
+    "radiusBySize": { "small": 0.4, "medium": 0.5, "large": 0.9, "huge": 1.6 },
+    "boardToArena": 6.5
+  },
+  "poses": { "hz": 15, "staleMs": 1500 },
+  "voice": {
+    "iceServers": [{ "urls": "stun:stun.l.google.com:19302" }],
+    "refDistance": 1.2,
+    "rolloff": 1,
+    "narratorGain": 1.35,
+    "speakingThreshold": 0.035
+  },
+  "vr": {
+    "panelDistance": 0.55,
+    "pressDepth": 0.012,
+    "armDepth": 0.03,
+    "pressCooldown": 0.3,
+    "palmHold": 0.35,
+    "palmFacing": 0.6,
+    "wristScale": 0.72,
+    "wristLift": 0.17,
+    "wristSide": 0.0,
+    "wristHide": 0.9,
+    "tossBelow": 0.03,
+    "twistGain": 1.5,
+    "minTextMetres": 0.015
+  }
+}

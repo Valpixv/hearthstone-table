@@ -1,0 +1,6 @@
+{
+  "_note": "Token tuning (design/flexibility-plan.md §3, §9b). Blank model stats, the life-size body cap and the fallback model.",
+  "defaults": { "hp": 10, "maxHp": 10, "ac": 10, "initBonus": 0, "speed": 30 },
+  "lifeCap": 12,
+  "genericModel": "bandit"
+}

@@ -1,0 +1,1436 @@
+{
+  "_attribution": "Class rules from the System Reference Document 5.2 by Wizards of the Coast LLC, CC-BY-4.0 https://creativecommons.org/licenses/by/4.0/. Standard array 15,14,13,12,10,8; AC from SRD starting equipment. Feature text is a short summary in this project's own words.",
+  "_fields": "hitDie, ac, abilities (suggested standard array), prof, attacks (quick attacks on the card), color: used by CombatManager. model: hero mini (models.json heroes). primary, saves, skillPick/skills, armor, weapons, tools, features, caster (full|half|pact|null), castAbility, cantrips, prepared, gear (items.json ids with qty), gold, gestures (default gesture → effect id).",
+  "barbarian": {
+    "name": "Barbarian",
+    "hitDie": 12,
+    "ac": 14,
+    "model": "fighter",
+    "color": "#b5651d",
+    "prof": 2,
+    "abilities": {
+      "str": 15,
+      "dex": 13,
+      "con": 14,
+      "int": 8,
+      "wis": 12,
+      "cha": 10
+    },
+    "primary": [
+      "str"
+    ],
+    "saves": [
+      "str",
+      "con"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "animal handling",
+      "athletics",
+      "intimidation",
+      "nature",
+      "perception",
+      "survival"
+    ],
+    "armor": {
+      "light": true,
+      "medium": true,
+      "heavy": false,
+      "shields": true
+    },
+    "weapons": "Simple and Martial weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Greataxe",
+        "ability": "str",
+        "dmg": "1d12",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Handaxe",
+        "ability": "str",
+        "dmg": "1d6",
+        "dmgType": "slashing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Rage",
+        "text": "Bonus action: for up to 10 minutes you resist bludgeoning, piercing and slashing damage, add +2 to Strength damage, and have advantage on Strength checks and saves. 2 uses, restored on a long rest."
+      },
+      {
+        "name": "Unarmored Defense",
+        "text": "Without armor your AC is 10 + Dexterity modifier + Constitution modifier (a shield still counts)."
+      },
+      {
+        "name": "Weapon Mastery",
+        "text": "You use the mastery property of two kinds of weapon you are trained with."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Rage",
+        "max": 2
+      }
+    ],
+    "caster": null,
+    "gear": [
+      [
+        "greataxe",
+        1
+      ],
+      [
+        "handaxe",
+        4
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "rope",
+        1
+      ],
+      [
+        "tinderbox",
+        1
+      ],
+      [
+        "torch",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 15,
+    "gestures": {
+      "point": "weapon-strike",
+      "gun": "rock-throw",
+      "palm": "thunderwave",
+      "slash": "sonic-shout"
+    }
+  },
+  "bard": {
+    "name": "Bard",
+    "hitDie": 8,
+    "ac": 13,
+    "model": "bard",
+    "color": "#a3c",
+    "prof": 2,
+    "abilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 12,
+      "int": 10,
+      "wis": 13,
+      "cha": 15
+    },
+    "primary": [
+      "cha"
+    ],
+    "saves": [
+      "dex",
+      "cha"
+    ],
+    "skillPick": 3,
+    "skills": "any",
+    "armor": {
+      "light": true,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons",
+    "tools": "Three musical instruments",
+    "attacks": [
+      {
+        "name": "Dagger",
+        "ability": "dex",
+        "dmg": "1d4",
+        "dmgType": "piercing"
+      },
+      {
+        "name": "Vicious Mockery",
+        "ability": "cha",
+        "dmg": "1d6",
+        "dmgType": "psychic",
+        "addMod": false,
+        "save": "wis"
+      }
+    ],
+    "features": [
+      {
+        "name": "Bardic Inspiration",
+        "text": "Bonus action: give a creature within 60 feet a d6 to add to one failed d20 test in the next hour. Uses equal your Charisma modifier, restored on a long rest."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "You cast Bard spells with Charisma. You know 2 cantrips and prepare 4 level 1 spells."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Bardic Inspiration (d6)",
+        "max": 2
+      }
+    ],
+    "caster": "full",
+    "castAbility": "cha",
+    "cantrips": 2,
+    "prepared": 4,
+    "gear": [
+      [
+        "leather-armor",
+        1
+      ],
+      [
+        "dagger",
+        2
+      ],
+      [
+        "lute",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "candle",
+        5
+      ],
+      [
+        "rations",
+        7
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 19,
+    "gestures": {
+      "point": "sonic-shout",
+      "gun": "arrow-volley",
+      "palm": "thunderwave",
+      "slash": "healing-light"
+    }
+  },
+  "cleric": {
+    "name": "Cleric",
+    "hitDie": 8,
+    "ac": 16,
+    "model": "cleric",
+    "color": "#db3",
+    "prof": 2,
+    "abilities": {
+      "str": 14,
+      "dex": 8,
+      "con": 13,
+      "int": 10,
+      "wis": 15,
+      "cha": 12
+    },
+    "primary": [
+      "wis"
+    ],
+    "saves": [
+      "wis",
+      "cha"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "history",
+      "insight",
+      "medicine",
+      "persuasion",
+      "religion"
+    ],
+    "armor": {
+      "light": true,
+      "medium": true,
+      "heavy": false,
+      "shields": true
+    },
+    "weapons": "Simple weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Mace",
+        "ability": "str",
+        "dmg": "1d6",
+        "dmgType": "bludgeoning"
+      },
+      {
+        "name": "Sacred Flame",
+        "ability": "wis",
+        "dmg": "1d8",
+        "dmgType": "radiant",
+        "addMod": false,
+        "save": "dex"
+      }
+    ],
+    "features": [
+      {
+        "name": "Spellcasting",
+        "text": "You cast Cleric spells with Wisdom. You know 3 cantrips and prepare 4 level 1 spells."
+      },
+      {
+        "name": "Divine Order",
+        "text": "Choose Protector (training with Martial weapons and Heavy armor) or Thaumaturge (one extra cantrip and a bonus to Arcana and Religion)."
+      }
+    ],
+    "resources": [],
+    "caster": "full",
+    "castAbility": "wis",
+    "cantrips": 3,
+    "prepared": 4,
+    "gear": [
+      [
+        "chain-shirt",
+        1
+      ],
+      [
+        "shield",
+        1
+      ],
+      [
+        "mace",
+        1
+      ],
+      [
+        "holy-symbol",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "blanket",
+        1
+      ],
+      [
+        "rations",
+        7
+      ],
+      [
+        "tinderbox",
+        1
+      ]
+    ],
+    "gold": 7,
+    "gestures": {
+      "point": "radiant-beam",
+      "gun": "radiant-pillar",
+      "palm": "healing-light",
+      "slash": "bless-sparkles"
+    }
+  },
+  "druid": {
+    "name": "Druid",
+    "hitDie": 8,
+    "ac": 13,
+    "model": "ranger",
+    "color": "#4a8f3c",
+    "prof": 2,
+    "abilities": {
+      "str": 8,
+      "dex": 12,
+      "con": 14,
+      "int": 13,
+      "wis": 15,
+      "cha": 10
+    },
+    "primary": [
+      "wis"
+    ],
+    "saves": [
+      "int",
+      "wis"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "arcana",
+      "animal handling",
+      "insight",
+      "medicine",
+      "nature",
+      "perception",
+      "religion",
+      "survival"
+    ],
+    "armor": {
+      "light": true,
+      "medium": false,
+      "heavy": false,
+      "shields": true
+    },
+    "weapons": "Simple weapons",
+    "tools": "Herbalism kit",
+    "attacks": [
+      {
+        "name": "Quarterstaff",
+        "ability": "str",
+        "dmg": "1d6",
+        "dmgType": "bludgeoning"
+      },
+      {
+        "name": "Produce Flame",
+        "ability": "wis",
+        "dmg": "1d8",
+        "dmgType": "fire",
+        "addMod": false
+      }
+    ],
+    "features": [
+      {
+        "name": "Spellcasting",
+        "text": "You cast Druid spells with Wisdom. You know 2 cantrips and prepare 4 level 1 spells."
+      },
+      {
+        "name": "Druidic",
+        "text": "You know the secret language of druids and always have Speak with Animals prepared."
+      },
+      {
+        "name": "Primal Order",
+        "text": "Choose Magician (one extra cantrip and a bonus to Arcana and Nature) or Warden (training with Martial weapons and Medium armor)."
+      }
+    ],
+    "resources": [],
+    "caster": "full",
+    "castAbility": "wis",
+    "cantrips": 2,
+    "prepared": 4,
+    "gear": [
+      [
+        "leather-armor",
+        1
+      ],
+      [
+        "shield",
+        1
+      ],
+      [
+        "sickle",
+        1
+      ],
+      [
+        "quarterstaff",
+        1
+      ],
+      [
+        "herbalism-kit",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 9,
+    "gestures": {
+      "point": "vine-entangle",
+      "gun": "ice-shard",
+      "palm": "wind-gust",
+      "slash": "healing-light"
+    }
+  },
+  "fighter": {
+    "name": "Fighter",
+    "hitDie": 10,
+    "ac": 16,
+    "model": "fighter",
+    "color": "#b33",
+    "prof": 2,
+    "abilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 13,
+      "int": 8,
+      "wis": 10,
+      "cha": 12
+    },
+    "primary": [
+      "str",
+      "dex"
+    ],
+    "saves": [
+      "str",
+      "con"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "acrobatics",
+      "animal handling",
+      "athletics",
+      "history",
+      "insight",
+      "intimidation",
+      "persuasion",
+      "perception",
+      "survival"
+    ],
+    "armor": {
+      "light": true,
+      "medium": true,
+      "heavy": true,
+      "shields": true
+    },
+    "weapons": "Simple and Martial weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Longsword",
+        "ability": "str",
+        "dmg": "1d8",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Javelin",
+        "ability": "str",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Fighting Style",
+        "text": "You gain one Fighting Style feat of your choice."
+      },
+      {
+        "name": "Second Wind",
+        "text": "Bonus action: regain 1d10 + your Fighter level hit points. 2 uses; one returns on a short rest, all on a long rest."
+      },
+      {
+        "name": "Weapon Mastery",
+        "text": "You use the mastery property of three kinds of weapon you are trained with."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Second Wind",
+        "max": 2
+      }
+    ],
+    "caster": null,
+    "gear": [
+      [
+        "chain-mail",
+        1
+      ],
+      [
+        "longsword",
+        1
+      ],
+      [
+        "shield",
+        1
+      ],
+      [
+        "javelin",
+        8
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "rope",
+        1
+      ],
+      [
+        "torch",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 4,
+    "gestures": {
+      "point": "weapon-strike",
+      "gun": "arrow-volley",
+      "palm": "shield-bubble",
+      "slash": "heavy-strike"
+    }
+  },
+  "monk": {
+    "name": "Monk",
+    "hitDie": 8,
+    "ac": 15,
+    "model": "rogue",
+    "color": "#d98b2b",
+    "prof": 2,
+    "abilities": {
+      "str": 12,
+      "dex": 15,
+      "con": 13,
+      "int": 10,
+      "wis": 14,
+      "cha": 8
+    },
+    "primary": [
+      "dex",
+      "wis"
+    ],
+    "saves": [
+      "str",
+      "dex"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "acrobatics",
+      "athletics",
+      "history",
+      "insight",
+      "religion",
+      "stealth"
+    ],
+    "armor": {
+      "light": false,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons and Martial weapons that have the Light property",
+    "tools": "One kind of artisan's tools or musical instrument",
+    "attacks": [
+      {
+        "name": "Unarmed Strike",
+        "ability": "dex",
+        "dmg": "1d6",
+        "dmgType": "bludgeoning"
+      },
+      {
+        "name": "Spear",
+        "ability": "dex",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Martial Arts",
+        "text": "Your unarmed strikes and Monk weapons can use Dexterity, deal at least 1d6 damage, and you can make an unarmed strike as a bonus action."
+      },
+      {
+        "name": "Unarmored Defense",
+        "text": "Without armor or a shield your AC is 10 + Dexterity modifier + Wisdom modifier."
+      }
+    ],
+    "resources": [],
+    "caster": null,
+    "gear": [
+      [
+        "spear",
+        1
+      ],
+      [
+        "dagger",
+        5
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "rope",
+        1
+      ],
+      [
+        "torch",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 11,
+    "gestures": {
+      "point": "weapon-strike",
+      "gun": "wind-gust",
+      "palm": "thunderwave",
+      "slash": "haste-trail"
+    }
+  },
+  "paladin": {
+    "name": "Paladin",
+    "hitDie": 10,
+    "ac": 18,
+    "model": "cleric",
+    "color": "#e8d9a0",
+    "prof": 2,
+    "abilities": {
+      "str": 15,
+      "dex": 10,
+      "con": 13,
+      "int": 8,
+      "wis": 12,
+      "cha": 14
+    },
+    "primary": [
+      "str",
+      "cha"
+    ],
+    "saves": [
+      "wis",
+      "cha"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "athletics",
+      "insight",
+      "intimidation",
+      "medicine",
+      "persuasion",
+      "religion"
+    ],
+    "armor": {
+      "light": true,
+      "medium": true,
+      "heavy": true,
+      "shields": true
+    },
+    "weapons": "Simple and Martial weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Longsword",
+        "ability": "str",
+        "dmg": "1d8",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Javelin",
+        "ability": "str",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Lay On Hands",
+        "text": "Bonus action: heal a creature you touch from a pool of 5 × your Paladin level hit points, restored on a long rest."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "You cast Paladin spells with Charisma. You prepare 2 level 1 spells."
+      },
+      {
+        "name": "Weapon Mastery",
+        "text": "You use the mastery property of two kinds of weapon you are trained with."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Lay On Hands (HP)",
+        "max": 5
+      }
+    ],
+    "caster": "half",
+    "castAbility": "cha",
+    "cantrips": 0,
+    "prepared": 2,
+    "gear": [
+      [
+        "chain-mail",
+        1
+      ],
+      [
+        "shield",
+        1
+      ],
+      [
+        "longsword",
+        1
+      ],
+      [
+        "javelin",
+        6
+      ],
+      [
+        "holy-symbol",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 9,
+    "gestures": {
+      "point": "heavy-strike",
+      "gun": "radiant-beam",
+      "palm": "healing-light",
+      "slash": "radiant-pillar"
+    }
+  },
+  "ranger": {
+    "name": "Ranger",
+    "hitDie": 10,
+    "ac": 14,
+    "model": "ranger",
+    "color": "#393",
+    "prof": 2,
+    "abilities": {
+      "str": 12,
+      "dex": 15,
+      "con": 13,
+      "int": 8,
+      "wis": 14,
+      "cha": 10
+    },
+    "primary": [
+      "dex",
+      "wis"
+    ],
+    "saves": [
+      "str",
+      "dex"
+    ],
+    "skillPick": 3,
+    "skills": [
+      "animal handling",
+      "athletics",
+      "insight",
+      "investigation",
+      "nature",
+      "perception",
+      "stealth",
+      "survival"
+    ],
+    "armor": {
+      "light": true,
+      "medium": true,
+      "heavy": false,
+      "shields": true
+    },
+    "weapons": "Simple and Martial weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Longbow",
+        "ability": "dex",
+        "dmg": "1d8",
+        "dmgType": "piercing"
+      },
+      {
+        "name": "Shortsword",
+        "ability": "dex",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Spellcasting",
+        "text": "You cast Ranger spells with Wisdom. You prepare 2 level 1 spells."
+      },
+      {
+        "name": "Favored Enemy",
+        "text": "You always have Hunter's Mark prepared and can cast it twice without a spell slot, restored on a long rest."
+      },
+      {
+        "name": "Weapon Mastery",
+        "text": "You use the mastery property of two kinds of weapon you are trained with."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Hunter's Mark (free)",
+        "max": 2
+      }
+    ],
+    "caster": "half",
+    "castAbility": "wis",
+    "cantrips": 0,
+    "prepared": 2,
+    "gear": [
+      [
+        "studded-leather",
+        1
+      ],
+      [
+        "scimitar",
+        1
+      ],
+      [
+        "shortsword",
+        1
+      ],
+      [
+        "longbow",
+        1
+      ],
+      [
+        "arrows",
+        20
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "rope",
+        1
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 7,
+    "gestures": {
+      "point": "arrow-volley",
+      "gun": "arrow-shot",
+      "palm": "vine-entangle",
+      "slash": "weapon-strike"
+    }
+  },
+  "rogue": {
+    "name": "Rogue",
+    "hitDie": 8,
+    "ac": 14,
+    "model": "rogue",
+    "color": "#555",
+    "prof": 2,
+    "abilities": {
+      "str": 12,
+      "dex": 15,
+      "con": 13,
+      "int": 14,
+      "wis": 10,
+      "cha": 8
+    },
+    "primary": [
+      "dex"
+    ],
+    "saves": [
+      "dex",
+      "int"
+    ],
+    "skillPick": 4,
+    "skills": [
+      "acrobatics",
+      "athletics",
+      "deception",
+      "insight",
+      "intimidation",
+      "investigation",
+      "perception",
+      "persuasion",
+      "sleight of hand",
+      "stealth"
+    ],
+    "armor": {
+      "light": true,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons and Martial weapons that have the Finesse or Light property",
+    "tools": "Thieves' tools",
+    "attacks": [
+      {
+        "name": "Shortsword",
+        "ability": "dex",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      },
+      {
+        "name": "Shortbow",
+        "ability": "dex",
+        "dmg": "1d6",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Expertise",
+        "text": "Double your proficiency bonus for two skills you are proficient in."
+      },
+      {
+        "name": "Sneak Attack",
+        "text": "Once per turn, add 1d6 damage to a Finesse or Ranged weapon hit when you have advantage or an ally is next to the target."
+      },
+      {
+        "name": "Thieves' Cant",
+        "text": "You know the secret code of rogues and one extra language."
+      },
+      {
+        "name": "Weapon Mastery",
+        "text": "You use the mastery property of two kinds of weapon you are trained with."
+      }
+    ],
+    "resources": [],
+    "caster": null,
+    "gear": [
+      [
+        "leather-armor",
+        1
+      ],
+      [
+        "dagger",
+        2
+      ],
+      [
+        "shortsword",
+        1
+      ],
+      [
+        "shortbow",
+        1
+      ],
+      [
+        "arrows",
+        20
+      ],
+      [
+        "thieves-tools",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "crowbar",
+        1
+      ],
+      [
+        "rations",
+        7
+      ],
+      [
+        "rope",
+        1
+      ]
+    ],
+    "gold": 8,
+    "gestures": {
+      "point": "weapon-strike",
+      "gun": "arrow-shot",
+      "palm": "poison-spray",
+      "slash": "misty-step"
+    }
+  },
+  "sorcerer": {
+    "name": "Sorcerer",
+    "hitDie": 6,
+    "ac": 12,
+    "model": "wizard",
+    "color": "#c0392b",
+    "prof": 2,
+    "abilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 13,
+      "int": 10,
+      "wis": 12,
+      "cha": 15
+    },
+    "primary": [
+      "cha"
+    ],
+    "saves": [
+      "con",
+      "cha"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "arcana",
+      "deception",
+      "insight",
+      "intimidation",
+      "persuasion",
+      "religion"
+    ],
+    "armor": {
+      "light": false,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Fire Bolt",
+        "ability": "cha",
+        "dmg": "1d10",
+        "dmgType": "fire",
+        "addMod": false
+      },
+      {
+        "name": "Dagger",
+        "ability": "dex",
+        "dmg": "1d4",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Spellcasting",
+        "text": "You cast Sorcerer spells with Charisma. You know 4 cantrips and prepare 2 level 1 spells."
+      },
+      {
+        "name": "Innate Sorcery",
+        "text": "Bonus action: for 1 minute your Sorcerer spell save DC rises by 1 and you have advantage on Sorcerer spell attacks. 2 uses, restored on a long rest."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Innate Sorcery",
+        "max": 2
+      }
+    ],
+    "caster": "full",
+    "castAbility": "cha",
+    "cantrips": 4,
+    "prepared": 2,
+    "gear": [
+      [
+        "spear",
+        1
+      ],
+      [
+        "dagger",
+        2
+      ],
+      [
+        "arcane-focus",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "bedroll",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "torch",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 28,
+    "gestures": {
+      "point": "fireball",
+      "gun": "chain-lightning",
+      "palm": "burning-hands",
+      "slash": "meteor-strike"
+    }
+  },
+  "warlock": {
+    "name": "Warlock",
+    "hitDie": 8,
+    "ac": 13,
+    "model": "wizard",
+    "color": "#6b3fa0",
+    "prof": 2,
+    "abilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 13,
+      "int": 12,
+      "wis": 10,
+      "cha": 15
+    },
+    "primary": [
+      "cha"
+    ],
+    "saves": [
+      "wis",
+      "cha"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "arcana",
+      "deception",
+      "history",
+      "intimidation",
+      "investigation",
+      "nature",
+      "religion"
+    ],
+    "armor": {
+      "light": true,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Eldritch Blast",
+        "ability": "cha",
+        "dmg": "1d10",
+        "dmgType": "force",
+        "addMod": false
+      },
+      {
+        "name": "Dagger",
+        "ability": "dex",
+        "dmg": "1d4",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Eldritch Invocations",
+        "text": "You gain one Eldritch Invocation of your choice, such as Pact of the Tome."
+      },
+      {
+        "name": "Pact Magic",
+        "text": "You cast Warlock spells with Charisma. You know 2 cantrips and prepare 2 level 1 spells; your slots return on a short or long rest."
+      }
+    ],
+    "resources": [],
+    "caster": "pact",
+    "castAbility": "cha",
+    "cantrips": 2,
+    "prepared": 2,
+    "gear": [
+      [
+        "leather-armor",
+        1
+      ],
+      [
+        "sickle",
+        1
+      ],
+      [
+        "dagger",
+        2
+      ],
+      [
+        "arcane-focus",
+        1
+      ],
+      [
+        "book",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "rations",
+        10
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 15,
+    "gestures": {
+      "point": "eldritch-blast",
+      "gun": "necrotic-ray",
+      "palm": "shadow-explosion",
+      "slash": "misty-step"
+    }
+  },
+  "wizard": {
+    "name": "Wizard",
+    "hitDie": 6,
+    "ac": 11,
+    "model": "wizard",
+    "color": "#36c",
+    "prof": 2,
+    "abilities": {
+      "str": 8,
+      "dex": 12,
+      "con": 13,
+      "int": 15,
+      "wis": 14,
+      "cha": 10
+    },
+    "primary": [
+      "int"
+    ],
+    "saves": [
+      "int",
+      "wis"
+    ],
+    "skillPick": 2,
+    "skills": [
+      "arcana",
+      "history",
+      "insight",
+      "investigation",
+      "medicine",
+      "nature",
+      "religion"
+    ],
+    "armor": {
+      "light": false,
+      "medium": false,
+      "heavy": false,
+      "shields": false
+    },
+    "weapons": "Simple weapons",
+    "tools": "",
+    "attacks": [
+      {
+        "name": "Fire Bolt",
+        "ability": "int",
+        "dmg": "1d10",
+        "dmgType": "fire",
+        "addMod": false
+      },
+      {
+        "name": "Dagger",
+        "ability": "dex",
+        "dmg": "1d4",
+        "dmgType": "piercing"
+      }
+    ],
+    "features": [
+      {
+        "name": "Spellcasting",
+        "text": "You cast Wizard spells with Intelligence. You know 3 cantrips, keep a spellbook with 6 level 1 spells and prepare 4 of them."
+      },
+      {
+        "name": "Ritual Adept",
+        "text": "You can cast any spell in your spellbook as a ritual if it has the Ritual tag, without preparing it."
+      },
+      {
+        "name": "Arcane Recovery",
+        "text": "After a short rest, once per day, recover spell slots with a combined level of up to half your Wizard level, rounded up."
+      }
+    ],
+    "resources": [
+      {
+        "name": "Arcane Recovery",
+        "max": 1
+      }
+    ],
+    "caster": "full",
+    "castAbility": "int",
+    "cantrips": 3,
+    "prepared": 4,
+    "gear": [
+      [
+        "quarterstaff",
+        1
+      ],
+      [
+        "dagger",
+        2
+      ],
+      [
+        "spellbook",
+        1
+      ],
+      [
+        "arcane-focus",
+        1
+      ],
+      [
+        "backpack",
+        1
+      ],
+      [
+        "book",
+        1
+      ],
+      [
+        "ink",
+        1
+      ],
+      [
+        "rations",
+        7
+      ],
+      [
+        "waterskin",
+        1
+      ]
+    ],
+    "gold": 5,
+    "gestures": {
+      "point": "fireball",
+      "gun": "magic-missile",
+      "palm": "ray-of-frost",
+      "slash": "lightning-bolt"
+    }
+  }
+}

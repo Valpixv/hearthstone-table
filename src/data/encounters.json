@@ -1,0 +1,10 @@
+[
+  {"id": "cellarRats", "label": "Cellar Rats", "scene": "castle_cellar", "timeOfDay": "night", "mood": "tense", "music": "eerie", "weather": [], "fog": true, "monsters": ["giant-rat", "giant-rat", "giant-rat", "kobold"]},
+  {"id": "cryptOfBones", "label": "Crypt of Bones", "scene": "crypt", "timeOfDay": "night", "mood": "eerie", "music": "eerie", "weather": [], "fog": true, "monsters": ["skeleton", "skeleton", "skeleton", "wight"]},
+  {"id": "ruinsAmbush", "label": "Ruins Ambush", "scene": "castle_ruins", "timeOfDay": "dusk", "mood": "combat", "music": "combat", "weather": [], "fog": false, "monsters": ["goblin", "goblin", "goblin", "goblin-boss", "wolf"]},
+  {"id": "cliffSiege", "label": "Cliff Fortress Siege", "scene": "rock_castle", "timeOfDay": "dusk", "mood": "combat", "music": "combat", "weather": ["embers"], "fog": false, "monsters": ["orc", "orc", "hobgoblin", "ogre"]},
+  {"id": "feyBargain", "label": "Fey Forest Bargain", "scene": "mossy_forest", "timeOfDay": "day", "mood": "calm", "music": "explore", "weather": ["sparkles"], "fog": false, "monsters": ["owlbear"], "npc": true},
+  {"id": "moonriseWerewolf", "label": "Moonrise Werewolf", "scene": "moonrise", "timeOfDay": "night", "mood": "eerie", "music": "eerie", "weather": [], "fog": true, "monsters": ["werewolf", "dire-wolf", "dire-wolf"]},
+  {"id": "dragonAwakens", "label": "Dragon Awakens", "scene": "rock_castle", "timeOfDay": "night", "mood": "combat", "music": "combat", "weather": ["embers"], "fog": false, "monsters": ["young-red-dragon", "cultist", "cultist"], "lightning": true},
+  {"id": "forestTroll", "label": "Fey Forest Troll", "scene": "forest_cave", "timeOfDay": "dusk", "mood": "tense", "music": "combat", "weather": ["rain"], "fog": false, "monsters": ["troll"]}
+]

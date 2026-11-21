@@ -1,0 +1,9 @@
+{
+  "_note": "Creature Editor quick-fill buttons (design/flexibility-plan.md §9b). They only fill in Max HP / current HP and Defense; every number stays editable.",
+  "presets": {
+    "weak": { "label": "Weak", "maxHp": 7, "ac": 11 },
+    "normal": { "label": "Normal", "maxHp": 22, "ac": 13 },
+    "tough": { "label": "Tough", "maxHp": 52, "ac": 15 },
+    "boss": { "label": "Boss", "maxHp": 135, "ac": 17 }
+  }
+}

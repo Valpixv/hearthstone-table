@@ -1,0 +1,674 @@
+{
+  "_attribution": "Monster statistics from the System Reference Document 5.2 by Wizards of the Coast LLC, CC-BY-4.0 https://creativecommons.org/licenses/by/4.0/. Entries marked \"source\": \"SRD 5.1 (CC-BY-4.0)\" (Orc) are from the System Reference Document 5.1 by Wizards of the Coast LLC, CC-BY-4.0, because SRD 5.2 has no such stat block.",
+  "goblin": {
+    "name": "Goblin",
+    "ac": 15,
+    "hp": 10,
+    "hpDice": "3d6",
+    "speed": 30,
+    "cr": "1/4",
+    "abilities": {
+      "str": 8,
+      "dex": 15,
+      "con": 10,
+      "int": 10,
+      "wis": 8,
+      "cha": 8
+    },
+    "actions": [
+      {
+        "name": "Scimitar",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Shortbow",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "goblin-boss": {
+    "name": "Goblin Boss",
+    "ac": 17,
+    "hp": 21,
+    "hpDice": "6d6",
+    "speed": 30,
+    "cr": "1",
+    "abilities": {
+      "str": 10,
+      "dex": 15,
+      "con": 10,
+      "int": 10,
+      "wis": 8,
+      "cha": 10
+    },
+    "actions": [
+      {
+        "name": "Scimitar",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Shortbow",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "orc": {
+    "name": "Orc",
+    "ac": 13,
+    "hp": 15,
+    "hpDice": "2d8+6",
+    "speed": 30,
+    "cr": "1/2",
+    "abilities": {
+      "str": 16,
+      "dex": 12,
+      "con": 16,
+      "int": 7,
+      "wis": 11,
+      "cha": 10
+    },
+    "actions": [
+      {
+        "name": "Greataxe",
+        "toHit": 5,
+        "dmg": "1d12+3",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Javelin",
+        "toHit": 5,
+        "dmg": "1d6+3",
+        "dmgType": "piercing"
+      }
+    ],
+    "source": "SRD 5.1 (CC-BY-4.0)"
+  },
+  "skeleton": {
+    "name": "Skeleton",
+    "ac": 14,
+    "hp": 13,
+    "hpDice": "2d8+4",
+    "speed": 30,
+    "cr": "1/4",
+    "abilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 15,
+      "int": 6,
+      "wis": 8,
+      "cha": 5
+    },
+    "actions": [
+      {
+        "name": "Shortsword",
+        "toHit": 5,
+        "dmg": "1d6+3",
+        "dmgType": "piercing"
+      },
+      {
+        "name": "Shortbow",
+        "toHit": 5,
+        "dmg": "1d6+3",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "zombie": {
+    "name": "Zombie",
+    "ac": 8,
+    "hp": 15,
+    "hpDice": "2d8+6",
+    "speed": 20,
+    "cr": "1/4",
+    "abilities": {
+      "str": 13,
+      "dex": 6,
+      "con": 16,
+      "int": 3,
+      "wis": 6,
+      "cha": 5
+    },
+    "actions": [
+      {
+        "name": "Slam",
+        "toHit": 3,
+        "dmg": "1d8+1",
+        "dmgType": "bludgeoning"
+      }
+    ]
+  },
+  "wolf": {
+    "name": "Wolf",
+    "ac": 12,
+    "hp": 11,
+    "hpDice": "2d8+2",
+    "speed": 40,
+    "cr": "1/4",
+    "abilities": {
+      "str": 14,
+      "dex": 15,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "dire-wolf": {
+    "name": "Dire Wolf",
+    "ac": 14,
+    "hp": 22,
+    "hpDice": "3d10+6",
+    "speed": 50,
+    "cr": "1",
+    "abilities": {
+      "str": 17,
+      "dex": 15,
+      "con": 15,
+      "int": 3,
+      "wis": 12,
+      "cha": 7
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 5,
+        "dmg": "1d10+3",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "ogre": {
+    "name": "Ogre",
+    "ac": 11,
+    "hp": 68,
+    "hpDice": "8d10+24",
+    "speed": 40,
+    "cr": "2",
+    "abilities": {
+      "str": 19,
+      "dex": 8,
+      "con": 16,
+      "int": 5,
+      "wis": 7,
+      "cha": 7
+    },
+    "actions": [
+      {
+        "name": "Greatclub",
+        "toHit": 6,
+        "dmg": "2d8+4",
+        "dmgType": "bludgeoning"
+      },
+      {
+        "name": "Javelin",
+        "toHit": 6,
+        "dmg": "2d6+4",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "troll": {
+    "name": "Troll",
+    "ac": 15,
+    "hp": 94,
+    "hpDice": "9d10+45",
+    "speed": 30,
+    "cr": "5",
+    "abilities": {
+      "str": 18,
+      "dex": 13,
+      "con": 20,
+      "int": 7,
+      "wis": 9,
+      "cha": 7
+    },
+    "actions": [
+      {
+        "name": "Rend",
+        "toHit": 7,
+        "dmg": "2d6+4",
+        "dmgType": "slashing"
+      }
+    ]
+  },
+  "bandit": {
+    "name": "Bandit",
+    "ac": 12,
+    "hp": 11,
+    "hpDice": "2d8+2",
+    "speed": 30,
+    "cr": "1/8",
+    "abilities": {
+      "str": 11,
+      "dex": 12,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "actions": [
+      {
+        "name": "Scimitar",
+        "toHit": 3,
+        "dmg": "1d6+1",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Light Crossbow",
+        "toHit": 3,
+        "dmg": "1d8+1",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "bandit-captain": {
+    "name": "Bandit Captain",
+    "ac": 15,
+    "hp": 52,
+    "hpDice": "8d8+16",
+    "speed": 30,
+    "cr": "2",
+    "abilities": {
+      "str": 15,
+      "dex": 16,
+      "con": 14,
+      "int": 14,
+      "wis": 11,
+      "cha": 14
+    },
+    "actions": [
+      {
+        "name": "Scimitar",
+        "toHit": 5,
+        "dmg": "1d6+3",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Pistol",
+        "toHit": 5,
+        "dmg": "1d10+3",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "cultist": {
+    "name": "Cultist",
+    "ac": 12,
+    "hp": 9,
+    "hpDice": "2d8",
+    "speed": 30,
+    "cr": "1/8",
+    "abilities": {
+      "str": 11,
+      "dex": 12,
+      "con": 10,
+      "int": 10,
+      "wis": 11,
+      "cha": 10
+    },
+    "actions": [
+      {
+        "name": "Ritual Sickle",
+        "toHit": 3,
+        "dmg": "1d4+1",
+        "dmgType": "slashing",
+        "extraDmg": "1",
+        "extraType": "necrotic"
+      }
+    ]
+  },
+  "giant-spider": {
+    "name": "Giant Spider",
+    "ac": 14,
+    "hp": 26,
+    "hpDice": "4d10+4",
+    "speed": 30,
+    "cr": "1",
+    "abilities": {
+      "str": 14,
+      "dex": 16,
+      "con": 12,
+      "int": 2,
+      "wis": 11,
+      "cha": 4
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 5,
+        "dmg": "1d8+3",
+        "dmgType": "piercing",
+        "extraDmg": "2d6",
+        "extraType": "poison"
+      }
+    ]
+  },
+  "ghoul": {
+    "name": "Ghoul",
+    "ac": 12,
+    "hp": 22,
+    "hpDice": "5d8",
+    "speed": 30,
+    "cr": "1",
+    "abilities": {
+      "str": 13,
+      "dex": 15,
+      "con": 10,
+      "int": 7,
+      "wis": 10,
+      "cha": 6
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 4,
+        "dmg": "1d6+2",
+        "dmgType": "piercing",
+        "extraDmg": "1d6",
+        "extraType": "necrotic"
+      },
+      {
+        "name": "Claw",
+        "toHit": 4,
+        "dmg": "1d4+2",
+        "dmgType": "slashing"
+      }
+    ]
+  },
+  "wight": {
+    "name": "Wight",
+    "ac": 14,
+    "hp": 82,
+    "hpDice": "11d8+33",
+    "speed": 30,
+    "cr": "3",
+    "abilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 16,
+      "int": 10,
+      "wis": 13,
+      "cha": 15
+    },
+    "actions": [
+      {
+        "name": "Necrotic Sword",
+        "toHit": 4,
+        "dmg": "1d8+2",
+        "dmgType": "slashing",
+        "extraDmg": "1d8",
+        "extraType": "necrotic"
+      },
+      {
+        "name": "Necrotic Bow",
+        "toHit": 4,
+        "dmg": "1d8+2",
+        "dmgType": "piercing",
+        "extraDmg": "1d8",
+        "extraType": "necrotic"
+      }
+    ]
+  },
+  "owlbear": {
+    "name": "Owlbear",
+    "ac": 13,
+    "hp": 59,
+    "hpDice": "7d10+21",
+    "speed": 40,
+    "cr": "3",
+    "abilities": {
+      "str": 20,
+      "dex": 12,
+      "con": 17,
+      "int": 3,
+      "wis": 12,
+      "cha": 7
+    },
+    "actions": [
+      {
+        "name": "Rend",
+        "toHit": 7,
+        "dmg": "2d8+5",
+        "dmgType": "slashing"
+      }
+    ]
+  },
+  "bugbear": {
+    "name": "Bugbear",
+    "ac": 14,
+    "hp": 33,
+    "hpDice": "6d8+6",
+    "speed": 30,
+    "cr": "1",
+    "abilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 13,
+      "int": 8,
+      "wis": 11,
+      "cha": 9
+    },
+    "actions": [
+      {
+        "name": "Grab",
+        "toHit": 4,
+        "dmg": "2d6+2",
+        "dmgType": "bludgeoning"
+      },
+      {
+        "name": "Light Hammer",
+        "toHit": 4,
+        "dmg": "3d4+2",
+        "dmgType": "bludgeoning"
+      }
+    ]
+  },
+  "kobold": {
+    "name": "Kobold",
+    "ac": 14,
+    "hp": 7,
+    "hpDice": "3d6-3",
+    "speed": 30,
+    "cr": "1/8",
+    "abilities": {
+      "str": 7,
+      "dex": 15,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "actions": [
+      {
+        "name": "Dagger",
+        "toHit": 4,
+        "dmg": "1d4+2",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "giant-rat": {
+    "name": "Giant Rat",
+    "ac": 13,
+    "hp": 7,
+    "hpDice": "2d6",
+    "speed": 30,
+    "cr": "1/8",
+    "abilities": {
+      "str": 7,
+      "dex": 16,
+      "con": 11,
+      "int": 2,
+      "wis": 10,
+      "cha": 4
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 5,
+        "dmg": "1d4+3",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "werewolf": {
+    "name": "Werewolf",
+    "ac": 15,
+    "hp": 71,
+    "hpDice": "11d8+22",
+    "speed": 30,
+    "cr": "3",
+    "abilities": {
+      "str": 16,
+      "dex": 14,
+      "con": 14,
+      "int": 10,
+      "wis": 11,
+      "cha": 10
+    },
+    "actions": [
+      {
+        "name": "Bite",
+        "toHit": 5,
+        "dmg": "2d8+3",
+        "dmgType": "piercing"
+      },
+      {
+        "name": "Scratch",
+        "toHit": 5,
+        "dmg": "2d6+3",
+        "dmgType": "slashing"
+      }
+    ]
+  },
+  "young-red-dragon": {
+    "name": "Young Red Dragon",
+    "ac": 18,
+    "hp": 178,
+    "hpDice": "17d10+85",
+    "speed": 40,
+    "cr": "10",
+    "abilities": {
+      "str": 23,
+      "dex": 10,
+      "con": 21,
+      "int": 14,
+      "wis": 11,
+      "cha": 19
+    },
+    "actions": [
+      {
+        "name": "Rend",
+        "toHit": 10,
+        "dmg": "2d6+6",
+        "dmgType": "slashing",
+        "extraDmg": "1d6",
+        "extraType": "fire"
+      }
+    ]
+  },
+  "mummy": {
+    "name": "Mummy",
+    "ac": 11,
+    "hp": 58,
+    "hpDice": "9d8+18",
+    "speed": 20,
+    "cr": "3",
+    "abilities": {
+      "str": 16,
+      "dex": 8,
+      "con": 15,
+      "int": 6,
+      "wis": 12,
+      "cha": 12
+    },
+    "actions": [
+      {
+        "name": "Rotting Fist",
+        "toHit": 5,
+        "dmg": "1d10+3",
+        "dmgType": "bludgeoning",
+        "extraDmg": "3d6",
+        "extraType": "necrotic"
+      }
+    ]
+  },
+  "minotaur": {
+    "name": "Minotaur",
+    "ac": 14,
+    "hp": 85,
+    "hpDice": "10d10+30",
+    "speed": 40,
+    "cr": "3",
+    "abilities": {
+      "str": 18,
+      "dex": 11,
+      "con": 16,
+      "int": 6,
+      "wis": 16,
+      "cha": 9
+    },
+    "actions": [
+      {
+        "name": "Abyssal Glaive",
+        "toHit": 6,
+        "dmg": "1d12+4",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Gore",
+        "toHit": 6,
+        "dmg": "4d6+4",
+        "dmgType": "piercing"
+      }
+    ]
+  },
+  "hobgoblin": {
+    "name": "Hobgoblin",
+    "ac": 18,
+    "hp": 11,
+    "hpDice": "2d8+2",
+    "speed": 30,
+    "cr": "1/2",
+    "abilities": {
+      "str": 13,
+      "dex": 12,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 9
+    },
+    "actions": [
+      {
+        "name": "Longsword",
+        "toHit": 3,
+        "dmg": "2d10+1",
+        "dmgType": "slashing"
+      },
+      {
+        "name": "Longbow",
+        "toHit": 3,
+        "dmg": "1d8+1",
+        "dmgType": "piercing",
+        "extraDmg": "3d4",
+        "extraType": "poison"
+      }
+    ]
+  }
+}

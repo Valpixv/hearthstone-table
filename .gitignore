@@ -1,0 +1,40 @@
+# ---- Build and test output ----
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.log
+.DS_Store
+
+# ---- Secrets and local runtime data ----
+.env
+.env.local
+.env.*.local
+/ai-cache/
+recordings/local/
+
+# ---- Local development workspace (kept on disk, not published) ----
+# AI studio setup, design notes, QA evidence and planning used while building the game.
+/.claude/
+/CLAUDE.md
+/project.yaml
+/design/
+/production/
+/DECISIONS.md
+/PITCH.md
+/moodboard.html
+/output/
+/assets/
+
+# Art source sheets: the game ships the sliced copies in public/assets/kit and the 512 px creature renders;
+# the large source sheets, prompts and art-direction notes stay local.
+public/assets/fantasy-kit-v1/
+public/assets/creatures-hq-3d/
+public/assets/ui-style-handoff/
+public/assets/icons/
+
+# Asset-pipeline scripts that need those local source sheets. Only the standalone tools are published.
+/tools/*
+!/tools/fetch-assets.mjs
+!/tools/copy-xr-profiles.mjs
+!/tools/tune-gestures.mjs

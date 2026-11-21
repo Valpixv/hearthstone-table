@@ -1,0 +1,9 @@
+{
+  "_note": "Request/approval tuning (design/flexibility-plan.md §5, §5b, §8). Protocol version travels on req / reqResult messages.",
+  "protocol": 1,
+  "queueMaxPerPlayer": 12,
+  "approveAllOutOfCombatMs": 60000,
+  "anomalyLogEveryMs": 5000,
+  "hpBands": { "bloodied": 0.5, "critical": 0.25 },
+  "historyShown": 5
+}

@@ -1,0 +1,1028 @@
+{
+  "_attribution": "Species, backgrounds and origin feats from the System Reference Document 5.2 by Wizards of the Coast LLC, CC-BY-4.0 https://creativecommons.org/licenses/by/4.0/. Trait text is a short summary in this project's own words.",
+  "species": {
+    "dragonborn": {
+      "name": "Dragonborn",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common, Draconic",
+      "traits": [
+        {
+          "name": "Draconic Ancestry",
+          "text": "Choose a kind of dragon; it sets the damage type of your breath weapon and your resistance."
+        },
+        {
+          "name": "Breath Weapon",
+          "text": "In place of one attack, exhale a 15-foot cone or 30-foot line: Dexterity save (DC 8 + Constitution modifier + proficiency bonus) or take 1d10 damage, half on a success. Uses equal your proficiency bonus per long rest."
+        },
+        {
+          "name": "Damage Resistance",
+          "text": "You resist the damage type of your ancestry."
+        },
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light within 60 feet as if it were bright, and in darkness as if it were dim."
+        },
+        {
+          "name": "Draconic Flight",
+          "text": "From level 5, as a bonus action you sprout spectral wings for 10 minutes and gain a fly speed equal to your speed, once per long rest."
+        }
+      ]
+    },
+    "dwarf": {
+      "name": "Dwarf",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common, Dwarvish",
+      "traits": [
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light and darkness out to 120 feet."
+        },
+        {
+          "name": "Dwarven Resilience",
+          "text": "You resist poison damage and have advantage on saves against the Poisoned condition."
+        },
+        {
+          "name": "Dwarven Toughness",
+          "text": "Your hit point maximum rises by 1, and by 1 more each time you gain a level."
+        },
+        {
+          "name": "Stonecunning",
+          "text": "As a bonus action on stone, gain Tremorsense 60 feet for 10 minutes. Uses equal your proficiency bonus per long rest."
+        }
+      ]
+    },
+    "elf": {
+      "name": "Elf",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common, Elvish",
+      "traits": [
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light within 60 feet as if it were bright, and in darkness as if it were dim."
+        },
+        {
+          "name": "Elven Lineage",
+          "text": "Choose Drow, High Elf or Wood Elf; each gives a cantrip or speed bonus now and spells at levels 3 and 5."
+        },
+        {
+          "name": "Fey Ancestry",
+          "text": "You have advantage on saves against the Charmed condition."
+        },
+        {
+          "name": "Keen Senses",
+          "text": "You are proficient in Insight, Perception or Survival."
+        },
+        {
+          "name": "Trance",
+          "text": "You do not sleep; four hours of meditation count as a long rest."
+        }
+      ]
+    },
+    "gnome": {
+      "name": "Gnome",
+      "size": "Small",
+      "speed": 30,
+      "languages": "Common, Gnomish",
+      "traits": [
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light within 60 feet as if it were bright, and in darkness as if it were dim."
+        },
+        {
+          "name": "Gnomish Cunning",
+          "text": "You have advantage on Intelligence, Wisdom and Charisma saves."
+        },
+        {
+          "name": "Gnomish Lineage",
+          "text": "Choose Forest Gnome (Minor Illusion, Speak with Animals) or Rock Gnome (Mending, Prestidigitation, tiny clockwork devices)."
+        }
+      ]
+    },
+    "goliath": {
+      "name": "Goliath",
+      "size": "Medium",
+      "speed": 35,
+      "languages": "Common, Giant",
+      "traits": [
+        {
+          "name": "Giant Ancestry",
+          "text": "Choose a gift from a kind of giant, such as Stone's Endurance (reduce damage by 1d12 + Constitution modifier as a reaction). Uses equal your proficiency bonus per long rest."
+        },
+        {
+          "name": "Large Form",
+          "text": "From level 5, as a bonus action become Large for 10 minutes, with advantage on Strength checks and +10 feet of speed, once per long rest."
+        },
+        {
+          "name": "Powerful Build",
+          "text": "You have advantage on checks to end the Grappled condition and count as one size larger for carrying."
+        }
+      ]
+    },
+    "halfling": {
+      "name": "Halfling",
+      "size": "Small",
+      "speed": 30,
+      "languages": "Common, Halfling",
+      "traits": [
+        {
+          "name": "Brave",
+          "text": "You have advantage on saves against the Frightened condition."
+        },
+        {
+          "name": "Halfling Nimbleness",
+          "text": "You can move through the space of any creature larger than you."
+        },
+        {
+          "name": "Luck",
+          "text": "When you roll a 1 on the d20 of a d20 test, you can reroll it and must use the new roll."
+        },
+        {
+          "name": "Naturally Stealthy",
+          "text": "You can hide when only a creature at least one size larger than you blocks the view."
+        }
+      ]
+    },
+    "human": {
+      "name": "Human",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common and one other",
+      "traits": [
+        {
+          "name": "Resourceful",
+          "text": "You gain Heroic Inspiration whenever you finish a long rest."
+        },
+        {
+          "name": "Skillful",
+          "text": "You are proficient in one skill of your choice."
+        },
+        {
+          "name": "Versatile",
+          "text": "You gain an Origin feat of your choice."
+        }
+      ]
+    },
+    "orc": {
+      "name": "Orc",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common, Orc",
+      "traits": [
+        {
+          "name": "Adrenaline Rush",
+          "text": "Dash as a bonus action and gain temporary hit points equal to your proficiency bonus. Uses equal your proficiency bonus per short or long rest."
+        },
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light and darkness out to 120 feet."
+        },
+        {
+          "name": "Relentless Endurance",
+          "text": "When you drop to 0 hit points but are not killed, you can drop to 1 instead, once per long rest."
+        }
+      ]
+    },
+    "tiefling": {
+      "name": "Tiefling",
+      "size": "Medium",
+      "speed": 30,
+      "languages": "Common, Infernal",
+      "traits": [
+        {
+          "name": "Darkvision",
+          "text": "You see in dim light within 60 feet as if it were bright, and in darkness as if it were dim."
+        },
+        {
+          "name": "Fiendish Legacy",
+          "text": "Choose Abyssal, Chthonic or Infernal; each gives a damage resistance and a cantrip now, and spells at levels 3 and 5."
+        },
+        {
+          "name": "Otherworldly Presence",
+          "text": "You know the Thaumaturgy cantrip."
+        }
+      ]
+    }
+  },
+  "backgrounds": {
+    "acolyte": {
+      "name": "Acolyte",
+      "abilities": [
+        "int",
+        "wis",
+        "cha"
+      ],
+      "feat": "magic-initiate-cleric",
+      "skills": [
+        "insight",
+        "religion"
+      ],
+      "tool": "Calligrapher's supplies",
+      "gear": [
+        [
+          "book",
+          1
+        ],
+        [
+          "holy-symbol",
+          1
+        ],
+        [
+          "paper",
+          10
+        ]
+      ],
+      "gold": 8
+    },
+    "criminal": {
+      "name": "Criminal",
+      "abilities": [
+        "dex",
+        "con",
+        "int"
+      ],
+      "feat": "alert",
+      "skills": [
+        "sleight of hand",
+        "stealth"
+      ],
+      "tool": "Thieves' tools",
+      "gear": [
+        [
+          "dagger",
+          2
+        ],
+        [
+          "thieves-tools",
+          1
+        ],
+        [
+          "crowbar",
+          1
+        ],
+        [
+          "pouch",
+          2
+        ]
+      ],
+      "gold": 16
+    },
+    "sage": {
+      "name": "Sage",
+      "abilities": [
+        "con",
+        "int",
+        "wis"
+      ],
+      "feat": "magic-initiate-wizard",
+      "skills": [
+        "arcana",
+        "history"
+      ],
+      "tool": "Calligrapher's supplies",
+      "gear": [
+        [
+          "quarterstaff",
+          1
+        ],
+        [
+          "book",
+          1
+        ],
+        [
+          "paper",
+          8
+        ]
+      ],
+      "gold": 8
+    },
+    "soldier": {
+      "name": "Soldier",
+      "abilities": [
+        "str",
+        "dex",
+        "con"
+      ],
+      "feat": "savage-attacker",
+      "skills": [
+        "athletics",
+        "intimidation"
+      ],
+      "tool": "One kind of gaming set",
+      "gear": [
+        [
+          "spear",
+          1
+        ],
+        [
+          "shortbow",
+          1
+        ],
+        [
+          "arrows",
+          20
+        ],
+        [
+          "dice-set",
+          1
+        ],
+        [
+          "healers-kit",
+          1
+        ]
+      ],
+      "gold": 14
+    }
+  },
+  "feats": {
+    "alert": {
+      "name": "Alert",
+      "text": "Add your proficiency bonus to initiative, and you may swap initiative with a willing ally right after rolling."
+    },
+    "magic-initiate-cleric": {
+      "name": "Magic Initiate (Cleric)",
+      "text": "You know two Cleric cantrips and one level 1 Cleric spell, which you can cast once per long rest without a slot. Choose Intelligence, Wisdom or Charisma for them."
+    },
+    "magic-initiate-wizard": {
+      "name": "Magic Initiate (Wizard)",
+      "text": "You know two Wizard cantrips and one level 1 Wizard spell, which you can cast once per long rest without a slot. Choose Intelligence, Wisdom or Charisma for them."
+    },
+    "savage-attacker": {
+      "name": "Savage Attacker",
+      "text": "Once per turn when you hit with a weapon, roll its damage dice twice and use either roll."
+    },
+    "skilled": {
+      "name": "Skilled",
+      "text": "You gain proficiency in any three skills or tools."
+    }
+  },
+  "alignments": [
+    "Lawful Good",
+    "Neutral Good",
+    "Chaotic Good",
+    "Lawful Neutral",
+    "Neutral",
+    "Chaotic Neutral",
+    "Lawful Evil",
+    "Neutral Evil",
+    "Chaotic Evil"
+  ],
+  "abilityMethods": {
+    "standardArray": [
+      15,
+      14,
+      13,
+      12,
+      10,
+      8
+    ],
+    "pointBuy": {
+      "points": 27,
+      "min": 8,
+      "max": 15,
+      "cost": {
+        "8": 0,
+        "9": 1,
+        "10": 2,
+        "11": 3,
+        "12": 4,
+        "13": 5,
+        "14": 7,
+        "15": 9
+      }
+    },
+    "roll": "4d6kh3"
+  },
+  "xpByLevel": [
+    0,
+    300,
+    900,
+    2700,
+    6500,
+    14000,
+    23000,
+    34000,
+    48000,
+    64000,
+    85000,
+    100000,
+    120000,
+    140000,
+    165000,
+    195000,
+    225000,
+    265000,
+    305000,
+    355000
+  ],
+  "spellSlots": {
+    "full": [
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3
+      ],
+      [
+        4,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    ],
+    "half": [
+      [
+        2
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        3
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3
+      ],
+      [
+        4,
+        3,
+        3
+      ],
+      [
+        4,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        1
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      [
+        4,
+        3,
+        3,
+        3,
+        2
+      ]
+    ],
+    "pact": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        4
+      ]
+    ]
+  },
+  "armorAC": {
+    "padded-armor": {
+      "base": 11,
+      "dex": 99
+    },
+    "leather-armor": {
+      "base": 11,
+      "dex": 99
+    },
+    "studded-leather": {
+      "base": 12,
+      "dex": 99
+    },
+    "hide-armor": {
+      "base": 12,
+      "dex": 2
+    },
+    "chain-shirt": {
+      "base": 13,
+      "dex": 2
+    },
+    "scale-mail": {
+      "base": 14,
+      "dex": 2
+    },
+    "breastplate": {
+      "base": 14,
+      "dex": 2
+    },
+    "half-plate": {
+      "base": 15,
+      "dex": 2
+    },
+    "ring-mail": {
+      "base": 14,
+      "dex": 0
+    },
+    "chain-mail": {
+      "base": 16,
+      "dex": 0
+    },
+    "splint-armor": {
+      "base": 17,
+      "dex": 0
+    },
+    "plate-armor": {
+      "base": 18,
+      "dex": 0
+    }
+  },
+  "weapons": {
+    "club": [
+      "1d4",
+      "bludgeoning",
+      "str"
+    ],
+    "dagger": [
+      "1d4",
+      "piercing",
+      "fin"
+    ],
+    "greatclub": [
+      "1d8",
+      "bludgeoning",
+      "str"
+    ],
+    "handaxe": [
+      "1d6",
+      "slashing",
+      "str"
+    ],
+    "javelin": [
+      "1d6",
+      "piercing",
+      "str"
+    ],
+    "light-hammer": [
+      "1d4",
+      "bludgeoning",
+      "str"
+    ],
+    "mace": [
+      "1d6",
+      "bludgeoning",
+      "str"
+    ],
+    "quarterstaff": [
+      "1d6",
+      "bludgeoning",
+      "str"
+    ],
+    "sickle": [
+      "1d4",
+      "slashing",
+      "str"
+    ],
+    "spear": [
+      "1d6",
+      "piercing",
+      "str"
+    ],
+    "light-crossbow": [
+      "1d8",
+      "piercing",
+      "dex"
+    ],
+    "dart": [
+      "1d4",
+      "piercing",
+      "fin"
+    ],
+    "shortbow": [
+      "1d6",
+      "piercing",
+      "dex"
+    ],
+    "sling": [
+      "1d4",
+      "bludgeoning",
+      "dex"
+    ],
+    "battleaxe": [
+      "1d8",
+      "slashing",
+      "str"
+    ],
+    "flail": [
+      "1d8",
+      "bludgeoning",
+      "str"
+    ],
+    "glaive": [
+      "1d10",
+      "slashing",
+      "str"
+    ],
+    "greataxe": [
+      "1d12",
+      "slashing",
+      "str"
+    ],
+    "greatsword": [
+      "2d6",
+      "slashing",
+      "str"
+    ],
+    "halberd": [
+      "1d10",
+      "slashing",
+      "str"
+    ],
+    "lance": [
+      "1d10",
+      "piercing",
+      "str"
+    ],
+    "longsword": [
+      "1d8",
+      "slashing",
+      "str"
+    ],
+    "maul": [
+      "2d6",
+      "bludgeoning",
+      "str"
+    ],
+    "morningstar": [
+      "1d8",
+      "piercing",
+      "str"
+    ],
+    "pike": [
+      "1d10",
+      "piercing",
+      "str"
+    ],
+    "rapier": [
+      "1d8",
+      "piercing",
+      "fin"
+    ],
+    "scimitar": [
+      "1d6",
+      "slashing",
+      "fin"
+    ],
+    "shortsword": [
+      "1d6",
+      "piercing",
+      "fin"
+    ],
+    "trident": [
+      "1d8",
+      "piercing",
+      "str"
+    ],
+    "war-pick": [
+      "1d8",
+      "piercing",
+      "str"
+    ],
+    "warhammer": [
+      "1d8",
+      "bludgeoning",
+      "str"
+    ],
+    "whip": [
+      "1d4",
+      "slashing",
+      "fin"
+    ],
+    "blowgun": [
+      "1",
+      "piercing",
+      "dex"
+    ],
+    "hand-crossbow": [
+      "1d6",
+      "piercing",
+      "dex"
+    ],
+    "heavy-crossbow": [
+      "1d10",
+      "piercing",
+      "dex"
+    ],
+    "longbow": [
+      "1d8",
+      "piercing",
+      "dex"
+    ]
+  }
+}

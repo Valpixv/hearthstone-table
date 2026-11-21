@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hearthstone Table</title>
+  <link rel="icon" href="assets/kit/dice/d20.webp" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Home: host a table, join one with its code, or start a quick test session. -->
+  <div id="start">
+    <div class="card">
+      <img class="home-logo" src="assets/kit/nav/hearthstone-table.webp" alt="Hearthstone Table" />
+      <h1 class="sr-only">Hearthstone Table</h1>
+      <p class="tag">Roll real dice with your real hands, in a world your Dungeon Master shapes live.</p>
+      <div id="join-banner" hidden>You've been invited to a table. Enter your name to take a seat.</div>
+      <div id="home-error" class="home-error" role="alert" hidden></div>
+
+      <div class="home-main">
+        <section class="home-col" id="home-host">
+          <button id="btn-host" class="kimg" aria-label="Host a table"><img src="assets/kit/session/host-table.webp" alt="" /></button>
+          <p class="home-hint">You are the Dungeon Master. You get a code to share with your players.</p>
+          <input id="host-name" maxlength="24" placeholder="Your name (optional)" autocomplete="off" aria-label="Dungeon Master name" />
+        </section>
+        <section class="home-col" id="home-join">
+          <button id="btn-join" class="kimg" aria-label="Join a table"><img src="assets/kit/session/join-table.webp" alt="" /></button>
+          <p class="home-hint">Type the code your Dungeon Master gave you.</p>
+          <div class="home-row">
+            <input id="join-code" maxlength="8" placeholder="TABLE CODE" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Table code" />
+            <input id="join-rejoin" maxlength="4" inputmode="numeric" placeholder="Rejoin #" autocomplete="off" title="Only when moving to another device (your headset): the 4-digit number shown on your first device" aria-label="Rejoin number (optional)" />
+          </div>
+          <input id="player-name" maxlength="24" placeholder="Your name (e.g. Aria)" autocomplete="off" aria-label="Your name" />
+          <label><input id="join-webcam" type="checkbox" /> Use webcam hands</label>
+        </section>
+      </div>
+
+      <details id="home-test">
+        <summary>Test mode: skip the code and the character stage</summary>
+        <div class="roles">
+          <label><input type="radio" name="role" value="player" checked /> Play as Player</label>
+          <label><input type="radio" name="role" value="dm" /> Play as DM</label>
+        </div>
+        <div class="modes">
+          <button id="btn-desktop" class="kimg" aria-label="Desktop mode: mouse and keyboard"><img src="assets/kit/nav/desktop-mode.webp" alt="" /></button>
+          <button id="btn-webcam" class="kimg" aria-label="Webcam hands: MediaPipe on your laptop"><img src="assets/kit/nav/webcam-hands.webp" alt="" /></button>
+          <button id="btn-vr" class="kimg" aria-label="Enter VR: Quest hand tracking"><img src="assets/kit/nav/enter-vr.webp" alt="" /></button>
+        </div>
+        <p class="fine">Everyone who starts in test mode on this server shares one table. Use it to try things alone or on one machine.</p>
+      </details>
+    </div>
+  </div>
+
+  <div id="hud" hidden>
+    <div id="badges"><span id="role-badge">Player</span><span id="code-badge" hidden title="Table code: share it with your players"></span><span id="lock-badge" hidden>Dice locked</span><span id="secret-badge" hidden>Secret rolls</span></div>
+    <div id="hud-buttons">
+      <button id="vr-btn" class="small" title="Put on your headset and enter VR">Enter VR</button>
+      <button id="mic-btn" class="small" title="Voice chat: click to turn your microphone on">Mic off</button>
+      <button id="help-btn" class="small" title="Keyboard shortcuts (?)">? Keys</button>
+    </div>
+    <div id="log"><b>Roll Log</b><ul id="log-list"></ul></div>
+    <div id="status" hidden></div>
+  </div>
+
+  <div id="dm-panel" hidden></div>
+  <div id="cheatsheet" hidden role="dialog" aria-label="Keyboard shortcuts">
+    <div class="card">
+      <header><b>Shortcuts</b><button class="small ghost" data-close title="Close (Esc)" aria-label="Close"><img class="kx" src="./assets/kit/ctl/close.webp" alt="" aria-hidden="true" draggable="false"></button></header>
+      <dl>
+        <dt>Drag a die</dt><dd>pick it up and fling it</dd>
+        <dt>Click a die</dt><dd>toss it (dice thrown within ~2 s count as one roll)</dd>
+        <dt>Space</dt><dd>roll every die on the table</dd>
+        <dt>1–6</dt><dd>spawn d4–d20 (players)</dd>
+        <dt>C</dt><dd>clear the dice</dd>
+        <dt>K</dt><dd>your character sheet</dd>
+        <dt>T</dt><dd>hide or show the dice tray</dd>
+        <dt>Shift+1…4</dt><dd>ready a gesture spell, then click a target</dd>
+        <dt>Arrows / WASD, right-drag</dt><dd>turn the view</dd>
+        <dt>Wheel / Z X</dt><dd>zoom</dd>
+        <dt>V</dt><dd>hold to talk (when push-to-talk is on)</dd>
+        <dt>? or H</dt><dd>this sheet · Esc closes it</dd>
+      </dl>
+      <div id="help-dm" hidden><b>Dungeon Master</b>
+        <dl>
+          <dt>M</dt><dd>open / close the DM dock</dd>
+          <dt>Shift+M</dt><dd>expand / shrink the DM dock</dd>
+          <dt>1–6</dt><dd>Table · Creatures · Dice · World · Forge · Tools</dd>
+          <dt>F</dt><dd>paint the fog of war</dd>
+          <dt>Click a mini</dt><dd>edit it, or pick it as a target for Damage / Heal</dd>
+          <dt>Drag a gallery tile</dt><dd>onto the room to place a creature life-size</dd>
+          <dt>Drag a life-size creature</dt><dd>to move it · wheel while dragging turns it</dd>
+        </dl></div>
+      <p class="hint">Game keys are ignored while you type or while a panel has focus.</p>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

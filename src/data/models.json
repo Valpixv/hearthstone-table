@@ -1,0 +1,731 @@
+{
+  "_note": "scale = target height in table units with a Medium humanoid = 1.0 (ModelLibrary normalises the base to y=0). tint multiplies material colour. Clip names are exact GLB animation names.",
+  "monsters": {
+    "goblin": {
+      "url": "/assets/models/presets/goblin.glb",
+      "scale": 0.75,
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/goblin",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/goblin.glb",
+        "scale": 0.75,
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "goblin-boss": {
+      "url": "/assets/models/presets/goblin-boss.glb",
+      "scale": 0.9,
+      "tint": "#c9a66b",
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/goblin-boss",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/goblin.glb",
+        "scale": 0.9,
+        "tint": "#c9a66b",
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "kobold": {
+      "url": "/assets/models/presets/kobold.glb",
+      "scale": 0.65,
+      "tint": "#c0563a",
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/kobold",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/goblin.glb",
+        "scale": 0.65,
+        "tint": "#c0563a",
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "orc": {
+      "url": "/assets/models/presets/orc.glb",
+      "scale": 1.05,
+      "clips": {
+        "idle": "CharacterArmature|Idle",
+        "attack": "CharacterArmature|Weapon",
+        "hit": "CharacterArmature|HitReact",
+        "death": "CharacterArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/orc",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/orc.glb",
+        "scale": 1.05,
+        "clips": {
+          "idle": "CharacterArmature|Idle",
+          "attack": "CharacterArmature|Weapon",
+          "hit": "CharacterArmature|HitReact",
+          "death": "CharacterArmature|Death"
+        }
+      }
+    },
+    "hobgoblin": {
+      "url": "/assets/models/presets/hobgoblin.glb",
+      "scale": 1,
+      "tint": "#d9773a",
+      "clips": {
+        "idle": "CharacterArmature|Idle",
+        "attack": "CharacterArmature|Weapon",
+        "hit": "CharacterArmature|HitReact",
+        "death": "CharacterArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/hobgoblin",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/orc.glb",
+        "scale": 1,
+        "tint": "#d9773a",
+        "clips": {
+          "idle": "CharacterArmature|Idle",
+          "attack": "CharacterArmature|Weapon",
+          "hit": "CharacterArmature|HitReact",
+          "death": "CharacterArmature|Death"
+        }
+      }
+    },
+    "bugbear": {
+      "url": "/assets/models/presets/bugbear.glb",
+      "scale": 1.25,
+      "tint": "#8a5a32",
+      "clips": {
+        "idle": "CharacterArmature|Idle",
+        "attack": "CharacterArmature|Weapon",
+        "hit": "CharacterArmature|HitReact",
+        "death": "CharacterArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/bugbear",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/orc.glb",
+        "scale": 1.25,
+        "tint": "#8a5a32",
+        "clips": {
+          "idle": "CharacterArmature|Idle",
+          "attack": "CharacterArmature|Weapon",
+          "hit": "CharacterArmature|HitReact",
+          "death": "CharacterArmature|Death"
+        }
+      }
+    },
+    "skeleton": {
+      "url": "/assets/models/presets/skeleton.glb",
+      "scale": 1,
+      "clips": {
+        "idle": "Idle",
+        "attack": "1H_Melee_Attack_Chop",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/skeleton",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/kaykit/Skeleton_Warrior.glb",
+        "scale": 1,
+        "clips": {
+          "idle": "Idle",
+          "attack": "1H_Melee_Attack_Chop",
+          "hit": "Hit_A",
+          "death": "Death_A"
+        }
+      }
+    },
+    "wight": {
+      "url": "/assets/models/presets/wight.glb",
+      "scale": 1.05,
+      "tint": "#7d8aa0",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Spellcast_Shoot",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/wight",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/kaykit/Skeleton_Mage.glb",
+        "scale": 1.05,
+        "tint": "#7d8aa0",
+        "clips": {
+          "idle": "Idle",
+          "attack": "Spellcast_Shoot",
+          "hit": "Hit_A",
+          "death": "Death_A"
+        }
+      }
+    },
+    "zombie": {
+      "url": "/assets/models/presets/zombie.glb",
+      "scale": 1,
+      "clips": {
+        "idle": "Idle",
+        "attack": "Punch",
+        "hit": "HitReact",
+        "death": "Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/zombie",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/zombie.glb",
+        "scale": 1,
+        "clips": {
+          "idle": "Idle",
+          "attack": "Punch",
+          "hit": "HitReact",
+          "death": "Death"
+        }
+      }
+    },
+    "ghoul": {
+      "url": "/assets/models/presets/ghoul.glb",
+      "scale": 0.95,
+      "tint": "#9aa39a",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Idle_Attack",
+        "hit": "HitReact",
+        "death": "Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/ghoul",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/zombie.glb",
+        "scale": 0.95,
+        "tint": "#9aa39a",
+        "clips": {
+          "idle": "Idle",
+          "attack": "Idle_Attack",
+          "hit": "HitReact",
+          "death": "Death"
+        }
+      }
+    },
+    "mummy": {
+      "url": "/assets/models/presets/mummy.glb",
+      "scale": 1.05,
+      "tint": "#d8c8a0",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Punch",
+        "hit": "HitReact",
+        "death": "Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/mummy",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/zombie.glb",
+        "scale": 1.05,
+        "tint": "#d8c8a0",
+        "clips": {
+          "idle": "Idle",
+          "attack": "Punch",
+          "hit": "HitReact",
+          "death": "Death"
+        }
+      }
+    },
+    "wolf": {
+      "url": "/assets/models/presets/wolf.glb",
+      "scale": 0.7,
+      "clips": {
+        "idle": "Idle",
+        "attack": "Attack",
+        "hit": "Idle_HitReact_Left",
+        "death": "Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/wolf",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/wolf.glb",
+        "scale": 0.7,
+        "clips": {
+          "idle": "Idle",
+          "attack": "Attack",
+          "hit": "Idle_HitReact_Left",
+          "death": "Death"
+        }
+      }
+    },
+    "dire-wolf": {
+      "url": "/assets/models/presets/dire-wolf.glb",
+      "scale": 1.1,
+      "tint": "#6b6560",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Attack",
+        "hit": "Idle_HitReact_Left",
+        "death": "Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/dire-wolf",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/wolf.glb",
+        "scale": 1.1,
+        "tint": "#6b6560",
+        "clips": {
+          "idle": "Idle",
+          "attack": "Attack",
+          "hit": "Idle_HitReact_Left",
+          "death": "Death"
+        }
+      }
+    },
+    "werewolf": {
+      "url": "/assets/models/presets/werewolf.glb",
+      "scale": 1,
+      "tint": "#4a3f38",
+      "clips": {
+        "idle": "CharacterArmature|Idle",
+        "attack": "CharacterArmature|Weapon",
+        "hit": "CharacterArmature|HitReact",
+        "death": "CharacterArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/werewolf",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/wolf.glb",
+        "scale": 1,
+        "tint": "#4a3f38",
+        "clips": {
+          "idle": "Idle_2",
+          "attack": "Attack",
+          "hit": "Idle_HitReact_Right",
+          "death": "Death"
+        }
+      }
+    },
+    "ogre": {
+      "url": "/assets/models/presets/ogre.glb",
+      "scale": 1.6,
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/ogre",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/giant.glb",
+        "scale": 1.6,
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "troll": {
+      "url": "/assets/models/presets/troll.glb",
+      "scale": 1.7,
+      "tint": "#7fae6a",
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/troll",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/giant.glb",
+        "scale": 1.7,
+        "tint": "#7fae6a",
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "owlbear": {
+      "url": "/assets/models/presets/owlbear.glb",
+      "scale": 1.5,
+      "tint": "#8b6a45",
+      "clips": {
+        "idle": "CharacterArmature|Idle",
+        "attack": "CharacterArmature|Weapon",
+        "hit": "CharacterArmature|HitReact",
+        "death": "CharacterArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/owlbear",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/yeti.glb",
+        "scale": 1.5,
+        "tint": "#8b6a45",
+        "clips": {
+          "idle": "CharacterArmature|Idle",
+          "attack": "CharacterArmature|Weapon",
+          "hit": "CharacterArmature|HitReact",
+          "death": "CharacterArmature|Death"
+        }
+      }
+    },
+    "minotaur": {
+      "url": "/assets/models/presets/minotaur.glb",
+      "scale": 1.6,
+      "tint": "#8a5838",
+      "clips": {
+        "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+        "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+        "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+        "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/minotaur",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/demon.glb",
+        "scale": 1.6,
+        "tint": "#8a5838",
+        "clips": {
+          "idle": "EnemyArmature|EnemyArmature|EnemyArmature|Idle",
+          "attack": "EnemyArmature|EnemyArmature|EnemyArmature|Attack",
+          "hit": "EnemyArmature|EnemyArmature|EnemyArmature|HitRecieve",
+          "death": "EnemyArmature|EnemyArmature|EnemyArmature|Death"
+        }
+      }
+    },
+    "giant-spider": {
+      "url": "/assets/models/presets/giant-spider.glb",
+      "scale": 0.8,
+      "clips": {
+        "idle": "SpiderArmature|Spider_Idle",
+        "attack": "SpiderArmature|Spider_Attack",
+        "hit": "SpiderArmature|Spider_Jump",
+        "death": "SpiderArmature|Spider_Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/giant-spider",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/spider.glb",
+        "scale": 0.8,
+        "clips": {
+          "idle": "SpiderArmature|Spider_Idle",
+          "attack": "SpiderArmature|Spider_Attack",
+          "hit": "SpiderArmature|Spider_Jump",
+          "death": "SpiderArmature|Spider_Death"
+        }
+      }
+    },
+    "giant-rat": {
+      "url": "/assets/models/presets/giant-rat.glb",
+      "scale": 0.4,
+      "clips": {
+        "idle": "RatArmature|Rat_Idle",
+        "attack": "RatArmature|Rat_Attack",
+        "hit": "RatArmature|Rat_Jump",
+        "death": "RatArmature|Rat_Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/giant-rat",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/rat.glb",
+        "scale": 0.4,
+        "clips": {
+          "idle": "RatArmature|Rat_Idle",
+          "attack": "RatArmature|Rat_Attack",
+          "hit": "RatArmature|Rat_Jump",
+          "death": "RatArmature|Rat_Death"
+        }
+      }
+    },
+    "young-red-dragon": {
+      "url": "/assets/models/presets/young-red-dragon.glb",
+      "scale": 2,
+      "tint": "#d04030",
+      "clips": {
+        "idle": "DragonArmature|Dragon_Flying",
+        "attack": "DragonArmature|Dragon_Attack",
+        "hit": "DragonArmature|Dragon_Hit",
+        "death": "DragonArmature|Dragon_Death"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/young-red-dragon",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/quaternius/dragon.glb",
+        "scale": 2,
+        "tint": "#d04030",
+        "clips": {
+          "idle": "DragonArmature|Dragon_Flying",
+          "attack": "DragonArmature|Dragon_Attack",
+          "hit": "DragonArmature|Dragon_Hit",
+          "death": "DragonArmature|Dragon_Death"
+        }
+      }
+    },
+    "bandit": {
+      "url": "/assets/models/presets/bandit.glb",
+      "scale": 1,
+      "tint": "#8a7a6a",
+      "clips": {
+        "idle": "Idle",
+        "attack": "1H_Melee_Attack_Stab",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/bandit",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/kaykit/Rogue_Hooded.glb",
+        "scale": 1,
+        "tint": "#8a7a6a",
+        "clips": {
+          "idle": "Idle",
+          "attack": "1H_Melee_Attack_Stab",
+          "hit": "Hit_A",
+          "death": "Death_A"
+        }
+      }
+    },
+    "bandit-captain": {
+      "url": "/assets/models/presets/bandit-captain.glb",
+      "scale": 1.05,
+      "clips": {
+        "idle": "Idle",
+        "attack": "1H_Melee_Attack_Chop",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/bandit-captain",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/kaykit/Barbarian.glb",
+        "scale": 1.05,
+        "clips": {
+          "idle": "Idle",
+          "attack": "1H_Melee_Attack_Chop",
+          "hit": "Hit_A",
+          "death": "Death_A"
+        }
+      }
+    },
+    "cultist": {
+      "url": "/assets/models/presets/cultist.glb",
+      "scale": 1,
+      "tint": "#8a2a2a",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Spellcast_Shoot",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      },
+      "baked": {
+        "provider": "local-rig-detail",
+        "fromIcon": "creature/cultist",
+        "rigged": true
+      },
+      "_was": {
+        "url": "/assets/models/kaykit/Mage.glb",
+        "scale": 1,
+        "tint": "#8a2a2a",
+        "clips": {
+          "idle": "Idle",
+          "attack": "Spellcast_Shoot",
+          "hit": "Hit_A",
+          "death": "Death_A"
+        }
+      }
+    }
+  },
+  "heroes": {
+    "fighter": {
+      "url": "/assets/models/kaykit/Knight.glb",
+      "scale": 1,
+      "clips": {
+        "idle": "Idle",
+        "attack": "1H_Melee_Attack_Chop",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    },
+    "wizard": {
+      "url": "/assets/models/kaykit/Mage.glb",
+      "scale": 1,
+      "clips": {
+        "idle": "Idle",
+        "attack": "Spellcast_Shoot",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    },
+    "rogue": {
+      "url": "/assets/models/kaykit/Rogue.glb",
+      "scale": 1,
+      "clips": {
+        "idle": "Idle",
+        "attack": "Dualwield_Melee_Attack_Stab",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    },
+    "cleric": {
+      "url": "/assets/models/kaykit/Knight.glb",
+      "scale": 1,
+      "tint": "#f0e2b0",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Spellcast_Raise",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    },
+    "ranger": {
+      "url": "/assets/models/kaykit/Rogue_Hooded.glb",
+      "scale": 1,
+      "tint": "#9fc08a",
+      "clips": {
+        "idle": "Idle",
+        "attack": "2H_Ranged_Shoot",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    },
+    "bard": {
+      "url": "/assets/models/kaykit/Barbarian.glb",
+      "scale": 1,
+      "tint": "#d0a0d8",
+      "clips": {
+        "idle": "Idle",
+        "attack": "Spellcast_Shoot",
+        "hit": "Hit_A",
+        "death": "Death_A"
+      }
+    }
+  },
+  "props": {
+    "coins": {
+      "url": "/assets/models/kaykit/coin_stack_large.glb",
+      "scale": 0.15
+    },
+    "coinsChest": {
+      "url": "/assets/models/kaykit/chest_gold.glb",
+      "scale": 0.25
+    },
+    "candle": {
+      "url": "/assets/models/kaykit/candle_lit.glb",
+      "scale": 0.2
+    },
+    "candleTriple": {
+      "url": "/assets/models/kaykit/candle_triple.glb",
+      "scale": 0.25
+    },
+    "book": {
+      "url": "/assets/models/quaternius/book.glb",
+      "scale": 0.06
+    },
+    "chest": {
+      "url": "/assets/models/kaykit/chest_gold.glb",
+      "scale": 0.3
+    },
+    "lectern": {
+      "url": "/assets/models/quaternius/book_open.glb",
+      "scale": 0.08,
+      "note": "No CC0 lectern found; open book stands in. Place on a raised surface."
+    }
+  }
+}

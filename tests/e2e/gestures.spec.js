@@ -39,7 +39,7 @@ async function playGesture(page, gesture) {
 
 for (const gesture of ['point', 'gun', 'palm', 'slash']) {
   test(`a "${gesture}" hand sign releases the confirmed strike and the damage lands`, async ({ page }) => {
-    test.setTimeout(180_000);
+    test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
     const errors = []; watch(page, 'DM', errors);
     await startTest(page, 'dm');
     const ids = await game(page, (T) => {
@@ -67,7 +67,7 @@ for (const gesture of ['point', 'gun', 'palm', 'slash']) {
 }
 
 test('a resting hand, a fist and a hand holding a die never cast', async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
   await startTest(page, 'dm');
   const fired = await page.evaluate(async () => {
     const T = window.__hearthstoneTest;

@@ -22,11 +22,11 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     needs: unit
-    # Each 3D browser test runs alone on its runner; four runners share the suite.
+    # Each 3D browser test runs alone on its runner; eight runners share the suite.
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,9 +35,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/8
         env:
           CI: 'true'
+          # GitHub runners have no GPU: three.js renders in software, so the 3D tests get triple time there.
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

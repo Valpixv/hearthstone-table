@@ -8,7 +8,7 @@ import { watch, ready, game, EVIDENCE } from './helpers.js';
 test.use({ viewport: { width: 1280, height: 720 } });
 
 test('host, join by code, build a character, and deal damage with a released strike', async ({ browser }) => {
-  test.setTimeout(240_000);
+  test.setTimeout(process.env.CI ? 3 * 240_000 : 240_000);
   const errors = [], dmCtx = await browser.newContext({ viewport: { width: 1280, height: 720 } }), plCtx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
   const dm = await dmCtx.newPage(), pl = await plCtx.newPage(); watch(dm, 'DM', errors); watch(pl, 'PL', errors);
   try {
@@ -126,7 +126,7 @@ test('host, join by code, build a character, and deal damage with a released str
 });
 
 test('a player who rejoins with their number keeps their character', async ({ browser }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
   const dmCtx = await browser.newContext(), aCtx = await browser.newContext(), bCtx = await browser.newContext();
   const dm = await dmCtx.newPage(), a = await aCtx.newPage(), b = await bCtx.newPage();
   try {

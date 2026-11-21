@@ -36,7 +36,7 @@ const rectPoint = (page, id, key) => game(page, (T, a) => {
 }, { id, ...(key === 'title' ? { title: true } : key instanceof RegExp ? { re: key.source } : { key }) });
 
 test('VR hands: system ray, pinch-click on release, close, drag, toss, scroll and the new panels', async ({ page }) => {
-  test.setTimeout(300_000);
+  test.setTimeout(process.env.CI ? 3 * 300_000 : 300_000);
   const errors = []; watch(page, 'VR', errors);
   await page.goto(`/?iwer&nodevui&test&fresh&room=${newRoom()}`); await ready(page);
   await page.check('input[value=dm]');

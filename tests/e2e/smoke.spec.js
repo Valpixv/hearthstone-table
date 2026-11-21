@@ -6,7 +6,7 @@ import { watch, startTest, game, EVIDENCE } from './helpers.js';
 test.use({ viewport: { width: 1280, height: 720 } });
 
 test('DM critical path smoke', async ({ page }) => {
-  test.setTimeout(240_000);
+  test.setTimeout(process.env.CI ? 3 * 240_000 : 240_000);
   const errors = []; watch(page, 'DM', errors);
   await startTest(page, 'dm');
   // Test mode skips the character stage and opens the dock on the Table tab.
@@ -80,7 +80,7 @@ test('DM critical path smoke', async ({ page }) => {
 });
 
 test('character sheet: fill from a class, roll from the sheet, rest', async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
   const errors = []; watch(page, 'DM', errors);
   await startTest(page, 'dm');
   await page.fill('#qa-names', 'Aria'); await page.click('#qa-go');

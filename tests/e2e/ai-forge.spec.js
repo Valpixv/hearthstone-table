@@ -6,7 +6,7 @@ import { watch, startTest, game } from './helpers.js';
 test.use({ viewport: { width: 1280, height: 720 } });
 
 test('DM forges a creature; nothing else can be generated', async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
   const errors = []; watch(page, 'DM', errors);
   await page.route('**/api/ai/**', (route) => route.continue({ headers: { ...route.request().headers(), 'x-ai-mock': '1' } })); // mock providers for the forge only
   await startTest(page, 'dm');

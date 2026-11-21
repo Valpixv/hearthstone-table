@@ -7,7 +7,7 @@ const PORT = Number(process.env.E2E_PORT || 5174);
 export default defineConfig({
   testDir: 'tests/e2e',
   // Generous: software WebGL on a busy machine (or a 2-core CI runner) can be slow to boot.
-  timeout: 180_000,
+  timeout: process.env.CI ? 540_000 : 180_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
   // Each page is a full 3D browser. Several at once ran this PC out of memory (Windows refused new processes:

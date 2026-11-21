@@ -7,7 +7,7 @@ import { watch, ready, game, newRoom } from './helpers.js';
 test.use({ viewport: { width: 960, height: 540 } });
 
 test('VR: panels, presses, creature dragging and strike release on the emulated headset', async ({ page }) => {
-  test.setTimeout(240_000);
+  test.setTimeout(process.env.CI ? 3 * 240_000 : 240_000);
   const errors = []; watch(page, 'VR', errors);
   await page.goto(`/?iwer&nodevui&test&fresh&room=${newRoom()}`); await ready(page);
   await page.check('input[value=dm]');

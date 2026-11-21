@@ -10,7 +10,7 @@ test.use({
 });
 
 test('two people hear each other: connection completes and audio flows both ways', async ({ browser }) => {
-  test.setTimeout(240_000);
+  test.setTimeout(process.env.CI ? 3 * 240_000 : 240_000);
   const errors = [], opts = { viewport: { width: 800, height: 450 }, permissions: ['microphone'] };
   const dmCtx = await browser.newContext(opts), plCtx = await browser.newContext(opts);
   const dm = await dmCtx.newPage(), pl = await plCtx.newPage(); watch(dm, 'DM', errors); watch(pl, 'PL', errors);
@@ -49,7 +49,7 @@ test('two people hear each other: connection completes and audio flows both ways
 });
 
 test('someone without a microphone still hears the others', async ({ browser }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(process.env.CI ? 3 * 180_000 : 180_000);
   const dmCtx = await browser.newContext({ permissions: ['microphone'] }), plCtx = await browser.newContext({ permissions: ['microphone'] });
   const dm = await dmCtx.newPage(), pl = await plCtx.newPage();
   try {

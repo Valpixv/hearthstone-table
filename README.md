@@ -1,6 +1,6 @@
 # Hearthstone Table
 
-**An open-source, browser-based VR tabletop for Dungeons & Dragons.** A Dungeon Master hosts a table; players join with a six-letter code, build a D&D 2024 character on a desktop (12 classes, 132 preset items, spells and coins), then put on a Meta Quest and sit around one shared table. Players pick up and throw physics dice with their own tracked hands, no controllers needed. Combat follows a clear loop: the DM calls for a roll, the player throws, the DM confirms, and the player releases the attack with one of four hand signs, each paired with one of 32 spell effects. The DM shapes the world live: 24 rigged, animated creatures placed life-size, an AI Forge that turns text into new 3D creatures, initiative, 16 conditions, eight 3D scenes, weather, music and lighting. Floating panels, a palm-activated menu and pinch clicks make the interface native to VR, and each player's voice comes from their seat.
+**A browser-based VR tabletop for Dungeons & Dragons.** A Dungeon Master hosts a table; players join with a six-letter code, build a D&D 2024 character on a desktop (12 classes, 132 preset items, spells and coins), then put on a Meta Quest and sit around one shared table. Players pick up and throw physics dice with their own tracked hands, no controllers needed. Combat follows a clear loop: the DM calls for a roll, the player throws, the DM confirms, and the player releases the attack with one of four hand signs, each paired with one of 32 spell effects. The DM shapes the world live: 24 rigged, animated creatures placed life-size, an AI Forge that turns text into new 3D creatures, initiative, 16 conditions, eight 3D scenes, weather, music and lighting. Floating panels, a palm-activated menu and pinch clicks make the interface native to VR, and each player's voice comes from their seat.
 
 The game supplies the table and the tools. Your group brings the campaign.
 
@@ -154,6 +154,8 @@ src/
   data/    classes · origins · items · effects · monsters · models · sets · tableDefaults · kit
 ```
 
-## Credits and licence
+## Copyright and credits
 
-The code is released under the [MIT licence](LICENSE). Models, skies, textures, controller profiles and fonts come from free open-source projects (CC0, MIT, OFL and W3C licences) and keep their own licences; every source is credited in [ASSETS.md](ASSETS.md). The painted interface art and creature portraits were generated for this project.
+Copyright © 2026 Valpixv. All rights reserved. The source is published here so it can be viewed and demonstrated; no licence to copy, modify or redistribute it is granted.
+
+Third-party models, skies, textures, controller profiles, fonts, libraries and rules text keep their own licences (CC0, MIT, SIL OFL, W3C and CC BY 4.0); every source and its required attribution is listed in [ASSETS.md](ASSETS.md).

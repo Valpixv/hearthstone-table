@@ -27,7 +27,7 @@ test('host, join by code, build a character, and deal damage with a released str
     await pl.goto('/?fresh'); await ready(pl);
     await pl.fill('#join-code', 'ZZZZZZ'); await pl.fill('#player-name', 'Aria');
     await pl.click('#btn-join');
-    await expect(pl.locator('#home-error')).toContainText('No table has that code', { timeout: 20_000 });
+    await expect(pl.locator('#home-error')).toContainText('No table has that code', { timeout: 60_000 });
     await expect(pl.locator('#start')).toBeVisible();
 
     // --- the player joins with the real code and lands in the character builder ---

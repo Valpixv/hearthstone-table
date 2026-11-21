@@ -23,6 +23,9 @@ const handRecordings = existsSync(harnessPlugin) ? (await import(pathToFileURL(h
 export default defineConfig(({ mode }) => ({
   base: './',
   plugins: [dropKitSources(), tableSync(), gestureSamples(), aiForge({ ...process.env, ...loadEnv(mode, process.cwd(), '') }), ...(mode === 'http' ? [] : [basicSsl()]), ...(handRecordings ? [handRecordings()] : [])],
+  // Pre-bundle the packages loaded with import() too. Otherwise Vite discovers them on first use and
+  // reloads the page mid-session (it broke the first browser test on every fresh CI runner).
+  optimizeDeps: { include: ['iwer', '@iwer/devui', '@mediapipe/tasks-vision'] },
   server: { host: mode === 'http' ? 'localhost' : true, port: 5173 },
   build: { chunkSizeWarningLimit: 2000 },
 }));

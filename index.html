@@ -94,6 +94,8 @@
       <p class="hint">Game keys are ignored while you type or while a panel has focus.</p>
     </div>
   </div>
+  <!-- A refused join reloads the page; show its message at once instead of after the 3D scene has loaded. -->
+  <script>try { const e = sessionStorage.getItem('hearthstone-error'); if (e) { const h = document.getElementById('home-error'); h.textContent = e; h.hidden = false; } } catch { /* storage unavailable */ }</script>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

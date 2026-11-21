@@ -13,7 +13,7 @@ test('host, join by code, build a character, and deal damage with a released str
   const dm = await dmCtx.newPage(), pl = await plCtx.newPage(); watch(dm, 'DM', errors); watch(pl, 'PL', errors);
   try {
     // --- the DM hosts and gets an invite code ---
-    await dm.goto('/?fresh'); await ready(dm);
+    await dm.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(dm);
     await dm.screenshot({ path: `${EVIDENCE}/01-home.png` });
     await dm.fill('#host-name', 'Mordenkainen');
     await dm.click('#btn-host');
@@ -24,14 +24,14 @@ test('host, join by code, build a character, and deal damage with a released str
     expect(await game(dm, (T) => T.dm.state.session.stage)).toBe('lobby');
 
     // --- a wrong code is refused on the home screen ---
-    await pl.goto('/?fresh'); await ready(pl);
+    await pl.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(pl);
     await pl.fill('#join-code', 'ZZZZZZ'); await pl.fill('#player-name', 'Aria');
     await pl.click('#btn-join');
     await expect(pl.locator('#home-error')).toContainText('No table has that code', { timeout: 60_000 });
     await expect(pl.locator('#start')).toBeVisible();
 
     // --- the player joins with the real code and lands in the character builder ---
-    await pl.goto('/?fresh'); await ready(pl);
+    await pl.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(pl);
     await pl.fill('#join-code', code.toLowerCase()); await pl.fill('#player-name', 'Aria');
     await pl.click('#btn-join');
     await expect(pl.locator('#lobby')).toBeVisible({ timeout: 30_000 });
@@ -130,15 +130,15 @@ test('a player who rejoins with their number keeps their character', async ({ br
   const dmCtx = await browser.newContext(), aCtx = await browser.newContext(), bCtx = await browser.newContext();
   const dm = await dmCtx.newPage(), a = await aCtx.newPage(), b = await bCtx.newPage();
   try {
-    await dm.goto('/?fresh'); await ready(dm); await dm.click('#btn-host');
+    await dm.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(dm); await dm.click('#btn-host');
     await expect.poll(() => dm.evaluate(() => window.__tableSync.code), { timeout: 30_000 }).toMatch(/^\w{6}$/);
     const code = await dm.evaluate(() => window.__tableSync.code);
-    await a.goto('/?fresh'); await ready(a); await a.fill('#join-code', code); await a.fill('#player-name', 'Bram'); await a.click('#btn-join');
+    await a.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(a); await a.fill('#join-code', code); await a.fill('#player-name', 'Bram'); await a.click('#btn-join');
     await expect.poll(() => a.evaluate(() => window.__tableSync.me?.rejoin), { timeout: 30_000 }).toMatch(/^\d{4}$/);
     const me = await a.evaluate(() => window.__tableSync.me);
     await expect.poll(() => dm.evaluate(() => window.__hearthstoneTest.dm.state.tokens.filter((t) => t.kind === 'pc').length), { timeout: 20_000 }).toBe(1);
     // The same person arrives on a second device (their headset) with the table code and their rejoin number.
-    await b.goto('/?fresh'); await ready(b); await b.fill('#join-code', code); await b.fill('#join-rejoin', me.rejoin); await b.click('#btn-join');
+    await b.goto('/?fresh', { waitUntil: 'domcontentloaded' }); await ready(b); await b.fill('#join-code', code); await b.fill('#join-rejoin', me.rejoin); await b.click('#btn-join');
     await expect.poll(() => b.evaluate(() => window.__tableSync.me?.id), { timeout: 30_000 }).toBe(me.id);
     expect(await b.evaluate(() => window.__tableSync.me.seat)).toBe(me.seat);
     await expect(a.locator('#home-error')).toContainText('moved to another device', { timeout: 20_000 }); // the first device gives up the seat

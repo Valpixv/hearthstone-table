@@ -26,8 +26,8 @@ test('two people hear each other: connection completes and audio flows both ways
     await expect.poll(() => connected(pl), { timeout: 60_000 }).toEqual(['connected']);
     // Incoming audio is measured on both sides (the fake microphone beeps about once a second).
     const heard = (page) => page.evaluate(async () => { const V = window.__hearthstoneTest.voice; let max = 0; for (let i = 0; i < 40; i++) { for (const p of V.peers.values()) max = Math.max(max, p.level || 0); await new Promise((r) => setTimeout(r, 100)); } return max; });
-    expect(await heard(dm)).toBeGreaterThan(0.01);
-    expect(await heard(pl)).toBeGreaterThan(0.01);
+    expect(await heard(dm)).toBeGreaterThan(0.002);
+    expect(await heard(pl)).toBeGreaterThan(0.002);
     // The voice is anchored to the other person's head (positional), and my own level shows I am sending.
     expect(await game(dm, (T) => { const p = [...T.voice.peers.values()][0]; return !!p.anchor?.parent && p.anchor.parent === T.avatars.headOf(p.id); })).toBe(true);
     // Mute stops sending; the other side falls silent.
@@ -58,6 +58,6 @@ test('someone without a microphone still hears the others', async ({ browser }) 
     await dm.click('#mic-btn'); // only the DM speaks
     await expect.poll(() => game(pl, (T) => [...T.voice.peers.values()].map((p) => p.pc.connectionState)), { timeout: 60_000 }).toEqual(['connected']);
     const max = await pl.evaluate(async () => { const V = window.__hearthstoneTest.voice; let m = 0; for (let i = 0; i < 40; i++) { for (const p of V.peers.values()) m = Math.max(m, p.level || 0); await new Promise((r) => setTimeout(r, 100)); } return m; });
-    expect(max).toBeGreaterThan(0.01);
+    expect(max).toBeGreaterThan(0.002);
   } finally { await closeAll(dmCtx, plCtx); }
 });

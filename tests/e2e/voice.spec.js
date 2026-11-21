@@ -2,7 +2,7 @@
 // the peer connection completes over the table socket, and each side measures the other's audio.
 // What this cannot cover: echo, latency and the microphone prompt inside a real headset browser.
 import { test, expect } from '@playwright/test';
-import { watch, startTest, game, newRoom } from './helpers.js';
+import { watch, startTest, game, newRoom, closeAll } from './helpers.js';
 
 test.use({
   viewport: { width: 800, height: 450 },
@@ -45,7 +45,7 @@ test('two people hear each other: connection completes and audio flows both ways
     await game(dm, (T) => T.voice.setNarrator(true));
     await expect.poll(() => game(pl, (T) => { const p = [...T.voice.peers.values()][0]; return [p.narrator, p.spatial.gain.value, p.flat.gain.value > 1]; }), { timeout: 10_000 }).toEqual([true, 0, true]);
     expect(errors).toEqual([]);
-  } finally { await dmCtx.close(); await plCtx.close(); }
+  } finally { await closeAll(dmCtx, plCtx); }
 });
 
 test('someone without a microphone still hears the others', async ({ browser }) => {
@@ -59,5 +59,5 @@ test('someone without a microphone still hears the others', async ({ browser }) 
     await expect.poll(() => game(pl, (T) => [...T.voice.peers.values()].map((p) => p.pc.connectionState)), { timeout: 60_000 }).toEqual(['connected']);
     const max = await pl.evaluate(async () => { const V = window.__hearthstoneTest.voice; let m = 0; for (let i = 0; i < 40; i++) { for (const p of V.peers.values()) m = Math.max(m, p.level || 0); await new Promise((r) => setTimeout(r, 100)); } return m; });
     expect(max).toBeGreaterThan(0.01);
-  } finally { await dmCtx.close(); await plCtx.close(); }
+  } finally { await closeAll(dmCtx, plCtx); }
 });

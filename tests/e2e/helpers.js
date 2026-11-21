@@ -35,3 +35,11 @@ export async function startTest(page, role = 'dm', { query = '', name = '', room
 
 /** Runs fn(T, arg) in the page with T = window.__hearthstoneTest. */
 export const game = (page, fn, arg) => page.evaluate(([src, a]) => (0, eval)(`(${src})`)(window.__hearthstoneTest, a), [fn.toString(), arg]);
+
+/**
+ * Closes browser contexts without letting a stuck close fail the test: on a GPU-less CI runner, disposing a
+ * software-WebGL context can hang after the test has already passed, and that hang then breaks the next test.
+ */
+export async function closeAll(...ctxs) {
+  await Promise.all(ctxs.map((c) => Promise.race([c.close().catch(() => {}), new Promise((r) => setTimeout(r, 15_000))])));
+}

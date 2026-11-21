@@ -29,7 +29,9 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // Software WebGL so three.js renders on CI machines without a GPU.
         // E2E_GPU=1 uses the machine's own graphics card (much faster locally); CI keeps software WebGL.
-        launchOptions: { args: process.env.E2E_GPU ? ['--use-angle=d3d11', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
+        launchOptions: { args: process.env.E2E_GPU ? ['--use-angle=d3d11', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
+          // CI only: Linux runners can't resolve WebRTC's '.local' host names, so voice between two test browsers never connects.
+          ...(process.env.CI ? ['--disable-features=WebRtcHideLocalIpsWithMdns'] : [])] },
       },
     },
   ],

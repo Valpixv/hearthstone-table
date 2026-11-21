@@ -3,7 +3,7 @@
 // the DM confirms it, and only the player's release changes the monster's hit points, on both tables.
 // Story type: Integration · Gate: BLOCKING
 import { test, expect } from '@playwright/test';
-import { watch, ready, game, EVIDENCE } from './helpers.js';
+import { watch, ready, game, EVIDENCE, closeAll } from './helpers.js';
 
 test.use({ viewport: { width: 1280, height: 720 } });
 
@@ -122,7 +122,7 @@ test('host, join by code, build a character, and deal damage with a released str
     await game(dm, (T) => T.dm.act('strike.now', { id: T.dm.state.strikes[0].id }));
     await expect.poll(() => game(pl, (T, id) => { const t = T.dm.tokens.find(id); return t.maxHp - t.hp; }, ids.pc), { timeout: 15_000 }).toBe(2);
     expect(errors).toEqual([]);
-  } finally { await dmCtx.close(); await plCtx.close(); }
+  } finally { await closeAll(dmCtx, plCtx); }
 });
 
 test('a player who rejoins with their number keeps their character', async ({ browser }) => {
@@ -144,5 +144,5 @@ test('a player who rejoins with their number keeps their character', async ({ br
     await expect(a.locator('#home-error')).toContainText('moved to another device', { timeout: 20_000 }); // the first device gives up the seat
     await expect.poll(() => b.evaluate(() => window.__hearthstoneTest.builder.token?.name), { timeout: 20_000 }).toBe('Bram');
     expect(await dm.evaluate(() => window.__hearthstoneTest.dm.state.tokens.filter((t) => t.kind === 'pc').length)).toBe(1); // no duplicate character
-  } finally { await dmCtx.close(); await aCtx.close(); await bCtx.close(); }
+  } finally { await closeAll(dmCtx, aCtx, bCtx); }
 });

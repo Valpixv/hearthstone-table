@@ -74,6 +74,7 @@ Open **http://localhost:5174** in Chrome or Edge.
 **Guides:**
 
 - **[Play & Test Field Guide (PDF, 21 pages)](docs/Hearthstone-Table-Field-Guide.pdf):** an illustrated, step-by-step guide for players and DMs. It covers starting the server, hosting and joining, building a character, a first encounter from the DM's call to the player's hand sign, webcam and Quest play, the four hand signs, scenes, voice, saving, the Forge, a three-pass playtest (desktop, webcam, headset), troubleshooting and the automated checks.
+- **[Test and Validation Plan](docs/TEST-AND-VALIDATION-PLAN.md):** success targets, playtest sessions, key checks, risks and open defects.
 
 **Try VR without a headset:** open `http://localhost:5174/?iwer` to load Meta's Immersive Web Emulator, an emulated Quest 3 with tracked hands that you move with the mouse, then press **Enter VR**. `?iwer=controller` emulates controllers instead.
 

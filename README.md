@@ -12,7 +12,7 @@ Hearthstone Table gives a Dungeon Master (DM) and players room to create with AI
 
 ## Contents
 
-1. [At a glance](#at-a-glance)
+1. [At a glance](#at-a-glance) · [Field Guide (PDF)](docs/Hearthstone-Table-Field-Guide.pdf)
 2. [Try it in five minutes](#try-it-in-five-minutes)
 3. [A session, start to finish (with screenshots)](#a-session-start-to-finish)
 4. [How a turn works](#how-a-turn-works)
@@ -71,7 +71,10 @@ Open **http://localhost:5174** in Chrome or Edge.
 2. Open a second tab at the same address, open **Test mode** again, leave **Play as Player** selected, then click **Desktop**.
 3. Both tabs are now at the same table. Use the DM tab to drag a creature in, call for a roll, and change the scene; use the player tab to roll and release the attack.
 
-A scripted 90-second walkthrough for a live demo is in [docs/DEMO.md](docs/DEMO.md).
+**Guides:**
+
+- **[Play & Test Field Guide (PDF, 21 pages)](docs/Hearthstone-Table-Field-Guide.pdf):** an illustrated, step-by-step guide for players and DMs. It covers starting the server, hosting and joining, building a character, a first encounter from the DM's call to the player's hand sign, webcam and Quest play, the four hand signs, scenes, voice, saving, the Forge, a three-pass playtest (desktop, webcam, headset), troubleshooting and the automated checks.
+- **[90-second demo script](docs/DEMO.md):** a timed walkthrough for a live demo.
 
 **Try VR without a headset:** open `http://localhost:5174/?iwer` to load Meta's Immersive Web Emulator, an emulated Quest 3 with tracked hands that you move with the mouse, then press **Enter VR**. `?iwer=controller` emulates controllers instead.
 

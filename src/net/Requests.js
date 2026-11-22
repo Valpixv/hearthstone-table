@@ -14,7 +14,7 @@ export const HEROES = Object.keys(MODELS.heroes || {});
 export const REQUESTABLE = ['hp', 'tempHp', 'update', 'stat', 'condition', 'initiative', 'deathSave', 'move', 'spawn', 'remove', 'duplicate', 'narrate', 'scene', 'weather', 'music', 'rest', 'levelup', 'call.answer', 'strike.release', ...BAG_TYPES];
 /** A player's own sheet / bag edits (and gifts, icons) apply at once: validated, no DM approval card. */
 export const SELF_SERVE = new Set([...BAG_TYPES, 'call.answer', 'strike.release']);
-/** Sheet fields a player may change on their own token through 'update'. HP is read-only for players. */
+/** Sheet fields a player may change on their own token through 'update'. A player's own HP changes go through 'hp' and apply at once. */
 export const SHEET_FIELDS = ['name', 'model', 'ac', 'initBonus', 'speed', 'custom', 'rolls', 'notes'];
 const OWN_ONLY = new Set(['update', 'initiative', 'deathSave', 'rest', 'levelup']);
 const NEEDS_TOKEN = new Set(['hp', 'tempHp', 'update', 'stat', 'condition', 'initiative', 'deathSave', 'move', 'remove', 'duplicate', 'rest', 'levelup']);
@@ -212,7 +212,9 @@ export class Requests {
     if (this.queue.filter((r) => r.from === from).length >= NET.queueMaxPerPlayer) { this.anomaly(`queue full for ${name}`); return this.reply(from, m.rid, 'denied', { reason: 'Too many requests waiting.' }); }
     const r = { rid: m.rid, from, name, type: m.type, payload: m.payload || {}, roll: m.roll || null, at: this.now() };
     r.label = describeRequest(r.type, r.payload, this.tokens);
-    if (SELF_SERVE.has(r.type) || this.settings.autoApprove[r.type] || this.allowed(from)) return this.run(r, null);
+    // A player's own hit points (damage, healing, temp HP on their own character) apply at once, like their bag.
+    const ownHp = (r.type === 'hp' || r.type === 'tempHp') && this.tokens.find((t) => t.id === r.payload?.id)?.owner === from;
+    if (SELF_SERVE.has(r.type) || ownHp || this.settings.autoApprove[r.type] || this.allowed(from)) return this.run(r, null);
     this.queue.push(r); this.toast(`📨 ${name} asks: ${r.label}`, 'join'); this.changed();
   }
 
@@ -238,7 +240,8 @@ export class Requests {
     if (changed) { const v = validateRequest(r.type, payload, r.from, this.tokens, this.dm.state); if (!v.ok && v.error !== 'You can only change your own character.') return this.reply(r.from, r.rid, 'denied', { reason: v.error }); }
     try {
       const h = r.type === 'hp' ? parseHpExpr(payload.expr) : null, by = this.tokens.find((t) => t.kind === 'pc' && t.owner === r.from);
-      if (h && h.op === 'delta' && by && this.dm.strikes && this.dm.state.settings?.gestureRelease !== false) this.execute('strike', { by: by.id, targets: [{ id: payload.id, amount: Math.abs(h.value) }], heal: h.value > 0, crit: !!payload.crit });
+      // Damage a player deals to someone else becomes their strike (released by their gesture); their own HP just changes.
+      if (h && h.op === 'delta' && by && payload.id !== by.id && this.dm.strikes && this.dm.state.settings?.gestureRelease !== false) this.execute('strike', { by: by.id, targets: [{ id: payload.id, amount: Math.abs(h.value) }], heal: h.value > 0, crit: !!payload.crit });
       else this.execute(r.type, payload);
     } catch (e) { this.anomaly(`executor ${r.type} failed: ${e.message}`); return this.reply(r.from, r.rid, 'denied', { reason: 'It could not be done.' }); }
     this.reply(r.from, r.rid, changed ? 'edited' : 'approved', { payload, label: describeRequest(r.type, payload, this.tokens) });
@@ -264,7 +267,7 @@ export class Requests {
   render(doc = globalThis.document) {
     if (!doc) return;
     const badge = doc.getElementById('dm-requests-badge');
-    if (badge) { badge.textContent = String(this.queue.length); badge.hidden = !this.queue.length; }
+    if (badge) { const n = this.queue.length; badge.textContent = n ? `${n} request${n === 1 ? '' : 's'}` : ''; badge.hidden = !n; }
     const root = doc.getElementById('dm-requests'); if (!root || !this.isDM()) return;
     injectStyle(doc);
     if (!root.dataset.wired) { root.dataset.wired = '1'; root.addEventListener('click', (e) => this.onClick(e, root)); root.addEventListener('change', (e) => { const a = e.target.dataset.auto; if (a) this.setAutoApprove(a, e.target.checked); }); }

@@ -89,10 +89,10 @@ export class CombatView {
     return list.length ? list.length * (size + 4) : 0;
   }
 
-  plateTexture(c) {
+  plateTexture(c, shownK = null) {
     // 1024x256 (2x a 512x128 layout) keeps the sprite's 4:1 aspect and stays crisp in VR.
     const cv = document.createElement('canvas'); cv.width = 512 * SS; cv.height = 128 * SS;
-    const g = cv.getContext('2d'), down = c.hp <= 0, k = Math.max(0, Math.min(1, c.hp / c.maxHp)), foe = c.faction === 'enemy';
+    const g = cv.getContext('2d'), down = c.hp <= 0, k = shownK ?? Math.max(0, Math.min(1, c.hp / c.maxHp)), foe = c.faction === 'enemy';
     g.setTransform(SS, 0, 0, SS, 0, 0); g.textBaseline = 'alphabetic';
     // Kit mahogany frame (nine-sliced); a plain mahogany slab until the art has loaded.
     if (!drawFrame(g, 'ui/panel', 0, 0, 512, 128, 0.3, 26)) {
@@ -131,16 +131,31 @@ export class CombatView {
       const key = `${c.name}|${c.hp}|${c.maxHp}|${c.tempHp}|${c.ac}|${c.faction}|${!!r.item}|${!!r.life}|${(c.conditions || []).map((k) => k.name).join(',')}`;
       let p = this.plates.get(c.id);
       if (!p) { p = {}; this.plates.set(c.id, p); }
-      if (p.key !== key) {
-        p.key = key; const tex = this.plateTexture(c);
-        for (const [slot, scale] of [['mini', 0.022], ['life', 0.16]]) {
-          if (!r[slot === 'mini' ? 'item' : 'life']) { if (p[slot]) { this.dropSprite(p[slot]); p[slot] = null; } continue; }
-          if (p[slot]) { p[slot].material.map.dispose(); p[slot].material.map = tex; } else p[slot] = this.sprite(tex, scale);
-        }
-      }
+      const target = c.maxHp > 0 ? Math.max(0, Math.min(1, c.hp / c.maxHp)) : 0;
+      if (p.shown == null) p.shown = target;
+      p.target = target; p.view = c; p.ref = r;
+      if (p.key !== key) { p.key = key; this.paintPlate(p); }
     }
     for (const [id, p] of this.plates) if (!live.has(id)) { ['mini', 'life'].forEach((k) => p[k] && this.dropSprite(p[k])); this.plates.delete(id); }
     this.syncCards();
+  }
+  /** Redraws a plate at its displayed HP fraction (p.shown) and puts the texture on its sprites. */
+  paintPlate(p) {
+    const tex = this.plateTexture(p.view, p.shown), r = p.ref;
+    for (const [slot, scale] of [['mini', 0.022], ['life', 0.16]]) {
+      if (!r[slot === 'mini' ? 'item' : 'life']) { if (p[slot]) { this.dropSprite(p[slot]); p[slot] = null; } continue; }
+      if (p[slot]) { p[slot].material.map.dispose(); p[slot].material.map = tex; } else p[slot] = this.sprite(tex, scale);
+    }
+  }
+  /** Eases each plate's health bar toward its real value (about half a second), redrawing at most 20 times a second. */
+  animateBars(t) {
+    for (const p of this.plates.values()) {
+      if (p.target == null || Math.abs(p.target - p.shown) < 0.004) { if (p.target != null && p.shown !== p.target) { p.shown = p.target; this.paintPlate(p); } continue; }
+      if (t - (p.drawnAt || 0) < 0.05) continue;
+      const dt = Math.min(0.1, t - (p.drawnAt || t - 0.05)); p.drawnAt = t;
+      p.shown += (p.target - p.shown) * Math.min(1, dt * 8);
+      this.paintPlate(p);
+    }
   }
   /** Removes a plate sprite and frees its texture and material. */
   dropSprite(sp) { this.scene.remove(sp); sp.material.map?.dispose(); sp.material.dispose(); }
@@ -229,6 +244,7 @@ export class CombatView {
   }
 
   update(t) {
+    this.animateBars(t);
     const plated = platedTokens(this.mgr.tokens.list, this.mgr.refs);
     for (const c of plated) {
       const r = this.mgr.refs[c.id], p = this.plates.get(c.id); if (!r || !p) continue;

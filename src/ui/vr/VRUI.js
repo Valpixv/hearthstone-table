@@ -737,7 +737,7 @@ export class VRUI {
     p.buttons([ses.stage === 'lobby' ? { label: 'Begin the adventure', primary: true, icon: 'action/continue', run: () => this.do('session', { stage: 'play' }) } : { label: 'Back to characters', run: () => this.do('session', { stage: 'lobby' }) }], { cols: 1, h: 90 });
     p.heading('Rules');
     const tog = (k, l) => ({ label: l, size: 24, on: set[k] !== false && !!set[k], key: `set${k}`, run: () => this.do('settings', { patch: { [k]: !set[k] } }) });
-    p.buttons([tog('rulesAssist', 'Rules assist'), tog('gestureRelease', 'Damage needs a gesture'), tog('autoReleaseMonsters', 'Monsters strike at once'), tog('linkMiniToBody', 'Minis move bodies'), tog('lockEnemyMinis', 'Only I move enemies'), tog('showDcToPlayers', 'Players see DCs')], { cols: 2, h: 66 });
+    p.buttons([tog('rulesAssist', 'Rules assist'), tog('gestureRelease', 'Damage needs a gesture'), tog('showDcToPlayers', 'Players see DCs')], { cols: 2, h: 66 });
     p.buttons([{ label: this.tactics?.gridOn ? 'Grid snap: on' : 'Grid snap: off', icon: 'tools/grid-snap', on: !!this.tactics?.gridOn, run: () => this.tactics?.setGrid(!this.tactics.gridOn) }, { label: 'Save table', icon: 'session/save-table', run: () => this.do('session.save') }, { label: 'Load table', icon: 'session/load-table', run: () => this.do('session.load') }], { cols: 3 });
     p.buttons([50, 100, 250].map((n) => ({ label: `Award ${n} XP`, size: 24, run: () => this.do('xp', { amount: n }) })), { cols: 3, h: 62 });
     p.buttons([10, 50, 100].map((n) => ({ label: `Share ${n} gp`, size: 24, run: () => this.do('loot.split', { coins: { gp: n } }) })), { cols: 3, h: 62 });

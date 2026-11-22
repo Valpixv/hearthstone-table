@@ -36,11 +36,10 @@ export class StrikeFlow {
     return this.tokenPoint(strike.by) || new THREE.Vector3(0, 1.4, 0);
   }
 
-  /** A strike was just armed. Creatures nobody plays release at once when the table is set to auto-release. */
+  /** A strike was just armed. A monster (or the DM) strikes as soon as the DM confirms it; a player character's waits for the gesture. */
   onArmed(strike) {
-    const by = this.dm.tokens?.find(strike.by), played = by && by.kind === 'pc' && by.owner && !by.away;
-    if (!played && this.dm.state.settings?.autoReleaseMonsters) this.release({ id: strike.id });
-    if (this.dm.state.settings?.gestureRelease === false) this.release({ id: strike.id });
+    const by = this.dm.tokens?.find(strike.by), pc = by?.kind === 'pc';
+    if (!pc || this.dm.state.settings?.gestureRelease === false) this.release({ id: strike.id });
   }
 
   /**
@@ -73,7 +72,7 @@ export class StrikeFlow {
         mgr.damage(t.id, t.amount, { crit: s.crit, type: s.damageType });
         // Concentration: damage asks the caster for a Constitution save (DC 10 or half the damage), a reminder the DM can dismiss.
         if (dm.state.settings?.rulesAssist !== false && tok.kind === 'pc' && tok.hp > 0 && (tok.conditions || []).some((c) => c.name === 'concentrating')) {
-          dm.state.calls = [...(dm.state.calls || []), ...makeCalls(dm.state.tokens, { to: [t.id], kind: 'save', ability: 'con', dc: Math.max(10, Math.floor(t.amount / 2)), label: 'Concentration save' })];
+          dm.state.calls = [...(dm.state.calls || []), ...makeCalls(dm.state.tokens, { to: [t.id], kind: 'save', ability: 'con', dc: Math.max(10, Math.floor(t.amount / 2)), label: 'Concentration save', concentration: true })];
         }
       }
     }

@@ -46,6 +46,7 @@ export class RollService {
     this.loose = null;         // hand-thrown dice being grouped into one roll
     this.looseWindowMs = 2000; // dice settling within this of each other are one roll
     this.onLooseRoll = null;   // (roll) → void: the dice tray shows hand-thrown rolls
+    this.onLooseDie = null;    // ({ sides, value }) → void: each hand-thrown die as it settles (a DM's call counts it)
     this.onAnnounce = null;    // ({ who, text, secret, roll }) → void: hook for table sync
     this.cleanupMs = 6000;     // tray dice are removed this long after they are read
     dm.rolls = this;         // the DM panel's "🎲 roll" initiative buttons use it
@@ -97,9 +98,12 @@ export class RollService {
   /** A loose (hand-thrown or clicked) die result: grouped with others settling within looseWindowMs into one roll. */
   collectLoose({ type, value }) {
     const sides = Number(String(type).slice(1));
-    if (!this.onLooseRoll || !sides) return;
+    if (!sides) return;
+    const face = sides === 10 && value === 0 ? 10 : value;
+    try { this.onLooseDie?.({ sides, value: face }); } catch (e) { console.warn('[rolls] onLooseDie', e); }
+    if (!this.onLooseRoll) return;
     const L = (this.loose ??= { faces: [] });
-    L.faces.push({ sides, value: sides === 10 && value === 0 ? 10 : value });
+    L.faces.push({ sides, value: face });
     clearTimeout(L.timer);
     L.timer = setTimeout(() => this.flushLoose(), this.looseWindowMs);
   }
@@ -112,6 +116,23 @@ export class RollService {
     const counts = {}; L.faces.forEach((f) => { counts[f.sides] = (counts[f.sides] || 0) + 1; });
     r = { ...r, label: 'Hand-thrown', expr: Object.entries(counts).map(([s, n]) => `${n}d${s}`).join(' + ') };
     this.onLooseRoll?.(r);
+  }
+
+  /** Removes this machine's loose dice from the tray: not part of a pending roll, not held in a hand. */
+  clearLoose() {
+    const D = this.dice;
+    for (const d of [...(D.dice || [])]) if (!this.groups.has(d.id) && !this.poolDice.has(d.id) && !D.grab?.isHeld?.(d)) D.remove(d);
+  }
+
+  /**
+   * A DM's call arrived: clears the loose dice and lays out the dice it needs, resting in the tray and unread
+   * until they are thrown (grabbed and released, clicked, or Space). @param {string[]} types e.g. ['d6', 'd6']
+   * @returns {object[]} the new dice
+   */
+  prepareHand(types) {
+    if (this.dice.locked) return [];
+    this.clearLoose();
+    return types.map((t) => { const d = this.dice.spawn(t); d.rolling = false; return d; });
   }
 
   /** Called with every die result; returns true when it belonged to a tray roll or an intent group. Loose dice are grouped. */

@@ -8,11 +8,10 @@ function request(expr) {
     calls: [{ id: 'request', to: 'hero', status: 'open', expr }],
     tokens: [{ id: 'hero', owner: 'player' }],
   } };
-  const tray = {};
+  // Hand-thrown dice reach the call one by one as they settle (RollService.onLooseDie); prepareHand lays them out.
+  const tray = { rolls: { onLooseDie: null, prepareHand: vi.fn(), clearLoose: vi.fn() } };
   const cards = new CallCards({ dm, sync: { role: 'player', me: { id: 'player' } }, tray, doc: null });
-  const throwDice = (sides, ...values) => tray.onResult({
-    label: 'Hand-thrown', roll: { dice: values.map((value) => ({ sides, value })) },
-  });
+  const throwDice = (sides, ...values) => values.forEach((value) => tray.rolls.onLooseDie({ sides, value }));
   return { cards, dm, throwDice };
 }
 
@@ -21,7 +20,7 @@ it('waits for the requested physical dice and applies the damage modifier', () =
   throwDice(20, 14);
   throwDice(6, 4);
   expect(dm.act).not.toHaveBeenCalled();
-  throwDice(6, 4, 5);
+  throwDice(6, 5);
   expect(dm.act).toHaveBeenCalledWith('call.answer', { id: 'request', total: 12, nat: null, text: '4 + 5 + 3' });
 });
 

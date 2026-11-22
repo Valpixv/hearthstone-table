@@ -57,7 +57,7 @@ export function makeCalls(tokens, p, now = Date.now()) {
     const dice = callDice(t, p);
     out.push({ id: uid('c'), to: id, kind: CALL_KINDS[p.kind] ? p.kind : 'custom', ability: p.ability || null, skill: p.skill || null, weapon: p.weapon ?? null,
       dc: p.dc === '' || p.dc == null ? null : Number(p.dc), showDc: !!p.showDc, adv: p.adv || null, targetId: p.targetId || null,
-      damageType: p.damageType || null, expr: dice.expr, mod: dice.mod, label: p.label || dice.label, status: 'open', result: null, at: now });
+      damageType: p.damageType || null, expr: dice.expr, mod: dice.mod, label: p.label || dice.label, concentration: !!p.concentration, status: 'open', result: null, at: now });
   }
   return out;
 }

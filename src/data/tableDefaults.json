@@ -4,9 +4,6 @@
     "rulesAssist": true,
     "abilityMethods": { "roll": true, "array": true, "buy": true },
     "gestureRelease": true,
-    "autoReleaseMonsters": false,
-    "linkMiniToBody": true,
-    "lockEnemyMinis": true,
     "showDcToPlayers": false,
     "gridSnap": true
   },

@@ -138,6 +138,7 @@ export class SheetBuilder {
     let rolled;
     if (!canThrow) rolled = rollAbilityScores();
     else {
+      this.sheetWin?.toggle(false); // the full sheet would show through while the table is uncovered for the throw
       this.busy = true; this.el.classList.add('rolling'); rolled = [];
       for (let i = 0; i < 6; i++) {
         this.progress = `Rolling score ${i + 1} of 6…`; this.render(true);

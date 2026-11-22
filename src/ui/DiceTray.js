@@ -8,6 +8,12 @@ import { kitIcon, closeIcon, glyph } from './kit.js';
 
 const SIDES = [4, 6, 8, 10, 12, 20, 100];
 const PHYS = [4, 6, 8, 10, 12, 20];
+/** Only the standard set can be rolled: a d7 or d9 has no die on the table. Throws a readable error otherwise. */
+export function standardOnly(pool) {
+  const odd = [...new Set(pool.groups.map((g) => g.sides).filter((n) => !SIDES.includes(n)))];
+  if (odd.length) throw new Error(`Only standard dice: d4, d6, d8, d10, d12, d20 and d100 (not ${odd.map((n) => `d${n}`).join(', ')}).`);
+  return pool;
+}
 const MY_ROLLS_KEY = 'hearthstone-myrolls';
 const HISTORY_MAX = 50;
 const TAGS = { none: 'No tag', attack: 'Attack vs Defense', save: 'Save vs DC', damage: 'Damage', death: 'Death save' };
@@ -31,7 +37,7 @@ export class DiceTray {
       <div class="dt-top"><span id="dt-chips" class="dt-chips"></span><button id="dt-hist-btn" class="small ghost">History ▾</button></div>
       <div id="dt-hist" class="dt-hist" hidden></div>
       <div class="dt-row">${SIDES.map((s) => `<button class="dt-die" data-sides="${s}" title="Click: add a d${s} · right-click or shift-click: remove one">${kitIcon(`dice/d${s}`, { cls: 'dt-ic' })}<span class="sr-only">d${s}</span><i></i></button>`).join('')}
-        <input id="dt-n" type="number" min="2" max="1000" placeholder="N" title="Sides for dN"/><button id="dt-dn" class="dt-die" title="Add a die with N sides (rolled digitally) · right-click: remove">dN<i></i></button>
+
         <span class="dt-mod">mod <button class="small" data-mod="-1" title="Modifier −1" aria-label="Modifier minus one">${glyph('ctl/minus')}</button><input id="dt-mod" type="number" value="0" title="Modifier"/><button class="small" data-mod="1" title="Modifier +1" aria-label="Modifier plus one">${glyph('ctl/plus')}</button></span>
         <button id="dt-clear" class="small ghost" title="Empty the pool">Clear</button></div>
       <div class="dt-row"><input id="dt-expr" class="dt-expr" placeholder="Type a roll: 1d20 + 2d6 + 3 · 4d6kh3 · d100" autocomplete="off"/>
@@ -61,9 +67,6 @@ export class DiceTray {
       b.onclick = (e) => (e.shiftKey ? this.removeDie(s) : this.addDie(s));
       b.oncontextmenu = (e) => { e.preventDefault(); this.removeDie(s); };
     });
-    const nSides = () => Math.floor(Number($('dt-n').value));
-    $('dt-dn').onclick = (e) => { const n = nSides(); if (!(n >= 2)) return this.err('Type a number of sides (2 or more) first'); return e.shiftKey ? this.removeDie(n) : this.addDie(n); };
-    $('dt-dn').oncontextmenu = (e) => { e.preventDefault(); const n = nSides(); if (n >= 2) this.removeDie(n); };
     el.querySelectorAll('[data-mod]').forEach((b) => { b.onclick = () => this.setPool(P.setMod(this.pool, this.pool.mod + Number(b.dataset.mod))); });
     $('dt-mod').onchange = () => this.setPool(P.setMod(this.pool, Number($('dt-mod').value) || 0));
     $('dt-expr').onchange = () => this.readExpr();
@@ -106,15 +109,15 @@ export class DiceTray {
 
   // ---------- pool ----------
   setPool(p) { this.pool = p; this.err(''); this.syncControls(); }
-  addDie(s) { try { this.setPool(P.add(this.pool, s)); } catch (e) { this.err(e.message); } }
+  addDie(s) { try { if (!SIDES.includes(s)) throw new Error('Only standard dice: d4, d6, d8, d10, d12, d20 and d100.'); this.setPool(P.add(this.pool, s)); } catch (e) { this.err(e.message); } }
   removeDie(s) { this.setPool(P.removeDie(this.pool, s)); }
   readExpr() {
     const v = this.$('dt-expr').value.trim();
-    try { this.pool = v ? P.parse(v) : EMPTY(); this.err(''); this.syncControls(false); } catch (e) { this.err(e.message); }
+    try { this.pool = v ? standardOnly(P.parse(v)) : EMPTY(); this.err(''); this.syncControls(false); } catch (e) { this.err(e.message); }
   }
   /** Loads an expression (saved roll, history, editor) into the tray. */
   loadExpr(expr, label = '') {
-    try { this.pool = P.parse(expr); this.err(''); } catch (e) { this.err(e.message); return; }
+    try { this.pool = standardOnly(P.parse(expr)); this.err(''); } catch (e) { this.err(e.message); return; }
     this.label = label || ''; this.$('dt-label').value = this.label; this.syncControls();
   }
   applyKeep() {
@@ -127,9 +130,6 @@ export class DiceTray {
     const $ = this.$, counts = {};
     for (const g of this.pool.groups) counts[g.sides] = (counts[g.sides] || 0) + g.count;
     this.el.querySelectorAll('[data-sides]').forEach((b) => { const n = counts[b.dataset.sides] || 0; b.querySelector('i').textContent = n || ''; b.classList.toggle('has', n > 0); });
-    const odd = Object.keys(counts).filter((s) => !SIDES.includes(Number(s)));
-    $('dt-dn').querySelector('i').textContent = odd.map((s) => `${counts[s]}d${s}`).join(' ');
-    $('dt-dn').classList.toggle('has', odd.length > 0);
     if (expr && document.activeElement !== $('dt-expr')) $('dt-expr').value = this.pool.groups.length || this.pool.mod ? P.toExpr(this.pool) : '';
     if (document.activeElement !== $('dt-mod')) $('dt-mod').value = this.pool.mod;
     const k = this.pool.groups[0]?.keep;

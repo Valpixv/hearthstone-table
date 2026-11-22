@@ -125,9 +125,11 @@ export function creaturesPanel(root, ui) {
 
   const condOpts = '<option value="">+ condition</option>' + Object.keys(CONDITIONS).map((k) => `<option value="${k}">${k}</option>`).join('');
   const chip = (k) => `<span style="background:${CONDITIONS[k.name] || '#555'}" title="${esc(CONDITION_REMINDERS[k.name] || k.name)} · click to remove" data-t="cdel" data-name="${esc(k.name)}">${iconHTML(k.name)}${esc(k.name)}${k.rounds ? ' ' + k.rounds : ''}</span>`;
+  const lastHp = new Map(); // token id -> the HP % its bar last showed, so a change slides instead of jumping
   const hpBar = (t) => {
     const p = t.maxHp > 0 ? Math.max(0, Math.min(100, (t.hp / t.maxHp) * 100)) : 0;
-    return `<div class="hpbar ${p <= 25 ? 'low' : p <= 50 ? 'mid' : ''}" title="${t.hp} / ${t.maxHp} HP"><i style="width:${p}%"></i></div>`;
+    const from = lastHp.has(t.id) ? lastHp.get(t.id) : p;
+    return `<div class="hpbar ${p <= 25 ? 'low' : p <= 50 ? 'mid' : ''}" title="${t.hp} / ${t.maxHp} HP"><i data-hid="${esc(t.id)}" style="--from:${from.toFixed(1)}%;width:${p}%"></i></div>`;
   };
   const stat = (c, i) => (!String(c.key).trim() ? '' : isNumericStat(c.value)
     ? `<span class="cstat">${esc(c.key)} <button aria-label="${esc(c.key)} −1" class="small" data-t="cs-" data-i="${i}" title="${esc(c.key)} −1">${glyph('ctl/minus')}</button><b>${esc(c.value)}</b><button aria-label="${esc(c.key)} +1" class="small" data-t="cs+" data-i="${i}" title="${esc(c.key)} +1">${glyph('ctl/plus')}</button></span>`
@@ -169,7 +171,13 @@ export function creaturesPanel(root, ui) {
       if (!typingIn(pe) && pe.dataset.sig !== pend) { pe.innerHTML = pend; pe.dataset.sig = pend; }
       $('cr-pending').hidden = !pend;
       const tl = $('tok-list'); if (typingIn(tl)) return;
-      tl.innerHTML = (dm.state.tokens || []).map(tokenRow).join('') || '<li class="hint">No tokens yet. Click a gallery tile, then Spawn.</li>';
+      // Bars mid-slide keep going: each new bar starts from the width the old one shows right now.
+      tl.querySelectorAll('.hpbar i[data-hid]').forEach((i) => { const w = i.parentElement.clientWidth; if (w) lastHp.set(i.dataset.hid, (i.getBoundingClientRect().width / w) * 100); });
+      const html = (dm.state.tokens || []).map(tokenRow).join('') || '<li class="hint">No tokens yet. Click a gallery tile, then Spawn.</li>';
+      const sig = html.replace(/ style="--from:[^"]*"/g, ''); // ignore each bar's starting width
+      if (sig === tl.dataset.sig) return; // nothing changed: leave the bars animating
+      tl.innerHTML = html; tl.dataset.sig = sig;
+
     },
   };
 }

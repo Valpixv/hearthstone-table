@@ -11,9 +11,6 @@ const HEROES = Object.keys(MODELS.heroes).filter((k) => !k.startsWith('_'));
 const SWITCHES = [
   ['rulesAssist', 'Rules assist', 'Classic D&D help: hit or miss against AC, saves against a DC, crits, death saves, monster initiative. Off = free dice.'],
   ['gestureRelease', 'Damage needs the attacker’s gesture', 'Confirmed damage waits until the attacker makes their hand sign (or presses Unleash). Off = it lands at once.'],
-  ['autoReleaseMonsters', 'Monsters strike at once', 'Damage dealt by creatures nobody plays is released without waiting for your gesture.'],
-  ['linkMiniToBody', 'Minis and bodies move together', 'Moving a mini on the map moves its life-size body to the matching spot in the room, and the reverse.'],
-  ['lockEnemyMinis', 'Only the DM moves enemy minis', 'Players can still ask to move them.'],
   ['showDcToPlayers', 'Players see the DC', 'Show the difficulty on the rolls you call for.'],
 ];
 
@@ -56,6 +53,11 @@ export function tablePanel(root, ui) {
     else if (st.dataset.st === 'lobby') act(dm, 'session', { stage: 'lobby' });
     else if (st.dataset.st === 'sheet') ui.sheet?.open('sheet', st.dataset.id);
     else if (st.dataset.st === 'unready') act(dm, 'ready', { id: st.dataset.id, on: false });
+    else if (st.dataset.st === 'kick') {
+      const t = dm.state.tokens.find((x) => x.id === st.dataset.id); if (!t) return undefined;
+      if (!globalThis.confirm?.(`Remove ${t.name} from the table? Their character is deleted and their rejoin number stops working.`)) return undefined;
+      ui.sync?.kick(t.owner); act(dm, 'remove', { id: t.id });
+    }
     return undefined;
   });
   $('loot-go').onclick = () => {
@@ -90,7 +92,7 @@ export function tablePanel(root, ui) {
       const roster = pcs.map((t) => { const c = completeness(t), ok = !!ses.ready?.[t.id];
         return `<li class="${ok ? 'ok' : ''}"><span><b>${esc(t.name)}</b> <small>${esc(t.sheet?.cls ? `level ${t.sheet.level} ${t.sheet.species || ''} ${t.sheet.cls}` : 'building…')}${t.away ? ' · away' : ''}${vrOf(t) ? ' · in headset' : ''}</small></span>
           <small title="${esc(c.missing.length ? 'Still open: ' + c.missing.join(', ') : 'Complete')}">sheet ${c.done}/${c.total}</small><em>${ok ? 'ready' : 'not ready'}</em>
-          <button class="small" data-st="sheet" data-id="${t.id}" title="Open this sheet">Sheet</button>${ok ? `<button class="small ghost" data-st="unready" data-id="${t.id}" title="Let them edit freely again">Unlock</button>` : ''}</li>`; }).join('');
+          <button class="small" data-st="sheet" data-id="${t.id}" title="Open this sheet">Sheet</button>${ok ? `<button class="small ghost" data-st="unready" data-id="${t.id}" title="Let them edit freely again">Unlock</button>` : ''}<button class="small ghost st-kick" data-st="kick" data-id="${t.id}" title="Remove this player and their character from the table">Kick</button></li>`; }).join('');
       const st = ses.stage === 'lobby'
         ? `<p class="st-stage"><b>Stage 1 · Characters.</b> Players are filling in their sheets on their desktops. ${ready} of ${pcs.length} ready.</p><ul class="st-roster">${roster || '<li class="hint">Nobody has joined yet. Share the code above.</li>'}</ul>
            <button class="btn wide" data-st="begin" id="st-begin"${pcs.length ? '' : ' disabled'}>Begin the adventure${pcs.length && ready < pcs.length ? ` (${pcs.length - ready} not ready)` : ''}</button>

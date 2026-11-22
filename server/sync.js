@@ -86,6 +86,11 @@ export class Room {
     return c || null;
   }
   byId(id) { return [...this.clients.values()].find((c) => c.id === id) || null; }
+  /** Removes a person from the table for good: their rejoin codes stop working. Returns their open connections. */
+  kick(id) {
+    for (const [code, i] of this.identities) if (i.id === id) this.identities.delete(code);
+    return [...this.clients.values()].filter((c) => c.id === id && c.id !== this.dmId);
+  }
 }
 
 /** The set of rooms on this server (unit-testable). */
@@ -165,6 +170,10 @@ function attach(httpServer, proto, port) {
       }
       if ((m.t === 'reqResult' || m.t === 'tell') && id === room.dmId) { const to = room.byId(m.to); return to && send(to.ws, m); }
       if (m.t === 'claim') { c.charId = m.charId; return presence(room); }
+      if (m.t === 'kick' && id === room.dmId) { // the DM removes a player: their devices go home and cannot rejoin
+        for (const k of room.kick(m.id)) { send(k.ws, { t: 'refused', error: 'The Dungeon Master removed you from this table.', fatal: true }); room.leave(k.conn); try { k.ws.close(); } catch { /* closed */ } }
+        return presence(room);
+      }
     });
     ws.on('close', () => {
       if (!room) return;

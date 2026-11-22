@@ -127,6 +127,8 @@ export class TableSync {
 
   /** Tells the table whether this person is in a headset (shown on the roster). */
   setVR(on) { this.client?.send({ t: 'vr', on: !!on }); }
+  /** DM only: sends a player home; their rejoin number stops working. */
+  kick(playerId) { if (this.role === 'dm' && playerId) this.client?.send({ t: 'kick', id: playerId }); }
 
   // ---------- local changes going out ----------
   hookLocal() {
@@ -318,8 +320,9 @@ export class TableSync {
   // ---------- HUD ----------
   buildHud() {
     const hud = document.getElementById('hud'); if (!hud) return;
-    hud.insertAdjacentHTML('beforeend', `<div id="net-badge" class="offline" title="Table connection"><i></i><span>Solo</span></div>
-      <div id="net-toasts" aria-live="polite"></div>
+    // The connection pill joins the top-right badges; notices and the waiting screen stay on the HUD itself.
+    (document.getElementById('badges') || hud).insertAdjacentHTML('afterbegin', '<div id="net-badge" class="offline" title="Table connection"><i></i><span>Solo</span></div>');
+    hud.insertAdjacentHTML('beforeend', `<div id="net-toasts" aria-live="polite"></div>
       <div id="net-wait" hidden><div class="embers"></div><div class="msg"><b>Waiting for the Dungeon Master…</b><small>The table will light up when they arrive.</small></div></div>`);
   }
   setStatus(s) {

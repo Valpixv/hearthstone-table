@@ -170,7 +170,7 @@ The DM's dock has six tabs (keys `1` to `6`), and the same tools exist as floati
 - **Forge:** describe a creature, approve the picture, get a model (see [AI Forge](#ai-forge-creatures-only)).
 - **Tools:** grid snap, ruler, area-of-effect templates.
 
-Rules switches (Table tab; defaults in `src/data/tableDefaults.json`): Rules assist, damage needs the attacker's gesture, monsters strike at once, minis and bodies move together, only the DM moves enemy minis, players see the DC.
+Rules switches (Table tab; defaults in `src/data/tableDefaults.json`): Rules assist, damage needs the attacker's gesture, players see the DC. Always on: a confirmed creature strike plays at once, a mini and its life-size body move together, and only the DM moves enemy minis.
 
 | | |
 |---|---|
@@ -251,14 +251,14 @@ Click **Mic** (or open the Voice panel in VR). Everyone connects directly to eve
 |---|---|
 | Left-drag a die or mini | Pick up and fling |
 | Click a die / the pouch | Toss it / new d20 |
-| `Space`, `1`–`6`, `C` | Roll every die, spawn d4–d20 (players), clear |
+| `Space`, `1`–`6`, `C` | Roll every die, spawn a d4–d20 onto the board, clear |
 | `K` | Character sheet |
 | `Shift+1…4`, then click | Cast a hand-sign spell (or release a confirmed strike) |
 | `Enter` or `U` | Unleash a confirmed strike |
 | `T` | Hide or show the dice tray |
 | `V` | Hold to talk (push-to-talk) |
 | Arrows / WASD, right-drag, wheel | Turn and zoom |
-| DM: `M`, `Shift+M`, `1`–`6` | Dock, full-screen dock, and its tabs: Table · Creatures · Dice · World · Forge · Tools |
+| DM: `M`, `Shift+M`, `Alt+1`–`6` | Dock, full-screen dock, and its tabs: Table · Creatures · Dice · World · Forge · Tools |
 | DM: `F` | Paint the fog of war away |
 | DM: drag a gallery tile onto the room | Place a creature life-size (onto the map: mini only) |
 | DM: drag a life-size creature, wheel while dragging | Move it, turn it |

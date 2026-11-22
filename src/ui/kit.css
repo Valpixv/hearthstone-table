@@ -466,4 +466,99 @@ body .gal-tile small {
 /* The call desk must not cover the DM panel's tabs: its empty box lets clicks through, and beside an open DM panel on a
    wide screen it moves into the free space between the panel and the roll log. */
 #call-desk { pointer-events: none; } #call-desk > * { pointer-events: auto; }
-@media (min-width: 1000px) { body:has(#dm-panel:not([hidden]):not(.expanded)) #call-desk { left: calc(50% + 100px); width: min(500px, calc(100vw - 470px)); } }
+/* The call desk stays put: top centre, where the connection badge used to be. */
+
+/* Builder: "Open the full sheet" shows the sheet above the builder (closing it returns to the builder). */
+body.in-lobby #char-sheet { z-index: 46; max-height: calc(100vh - 24px); }
+/* Spell bar: bottom-right corner, under the roll log (which ends 280px above the bottom), clear of the call desk. */
+#spell-bar { top: auto; bottom: 12px; right: 12px; transform: none; gap: 4px; }
+#spell-bar button { height: 50px; }
+/* Sheet roll links: no glow, just ink and a soft highlight. */
+#char-sheet .rollable, #char-sheet .rollable:hover, #char-sheet .rollable:focus { text-shadow: none; filter: none; }
+#char-sheet .rollable:hover, #char-sheet .rollable:focus-visible { color: var(--ink-900); background: rgba(184, 131, 47, 0.22); text-decoration: underline; outline: none; }
+
+/* "Call for a roll": open state keeps the plank and glows instead of swapping to another button skin. */
+#call-desk .cd-toggle.on { border-image-source: var(--sk-plank); color: var(--brass-300); filter: drop-shadow(0 0 7px rgba(240, 207, 126, 0.85)); }
+#call-desk .cd-toggle.on:hover { filter: drop-shadow(0 0 9px rgba(240, 207, 126, 0.95)) brightness(1.06); }
+
+/* Forge: three matching buttons, icon beside the word. */
+.forge-acts { display: flex; gap: 4px; }
+.forge-acts button { flex: 1 1 0; min-width: 0; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 3px 4px; font-size: 11px; white-space: nowrap; }
+.forge-acts button img.fa-ic, .forge-acts button .fa-ic { max-height: 20px; height: 20px; width: auto; margin: 0; }
+
+/* Token rows (dock.css loads later, so the id raises these): a framed parchment card with a real HP bar. */
+#tok-list .tok { background: none; border-radius: 0; border: 8px solid transparent; border-width: 8px 10px; border-image: var(--sk-input) 46 52 fill / 8px 10px / 0 stretch; padding: 2px 4px; color: var(--ink-900); }
+#tok-list .tok small { color: #6b4a2e; }
+#tok-list .tok-hp { gap: 8px; }
+#tok-list .tok-hp b { color: var(--ink-900); font: 700 13px var(--font-head); min-width: 44px; text-align: right; }
+#tok-list .hpbar { flex: 1 1 auto; width: auto; min-width: 120px; height: 22px; padding: 0; box-sizing: border-box; background: none; box-shadow: none; border-radius: 0; overflow: hidden;
+  border: 0 solid transparent; border-width: 3px 10px 3px 26px; border-image: var(--sk-hp) 40 60 40 140 fill / 3px 10px 3px 26px / 0 stretch; }
+#tok-list .hpbar i { height: 100%; border-radius: 6px; background: linear-gradient(180deg, #ff6a55, #c81e14 60%, #8e140c); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35); }
+#tok-list .hpbar.mid i { background: linear-gradient(180deg, #f2c35a, #c98a1c); } #tok-list .hpbar.low i { background: linear-gradient(180deg, #e0452a, #8e140c); }
+#tok-list .hp-expr { flex: 0 0 150px; }
+#tok-list .tok-stats, #tok-list .tok-stats label { color: var(--ink-900); opacity: 1; font-weight: 600; }
+#cb-rounds { width: 56px !important; flex: none !important; display: inline-block; }
+
+#call-desk .cd-card.strike {
+  border-width: 16px;
+  border-image: url('/assets/kit/ui/strike-panel.webp') 48 fill / 16px stretch;
+  background: none !important;
+  padding: 2px 4px;
+}
+#tok-list .tok .tok-name { color: var(--mahogany-700); } #tok-list .tok.ally .tok-name { color: #2f6b3a; } #tok-list .tok.enemy .tok-name { color: #8e2a1a; }
+#tok-list .hp-expr { flex: 0 1 130px; min-width: 0; }
+
+/* Call for a roll: one fixed place at the top centre. */
+#call-desk { top: 12px; left: 50%; transform: translateX(-50%); width: min(500px, calc(100vw - 24px)); }
+#call-desk > .cd-toggle { align-self: center; }
+/* Connection badge ("Hosting · 2"): a small pill in the top-right row, beside the role badge. */
+#badges #net-badge { position: static; transform: none; padding: 0 10px; font-size: 10px; letter-spacing: .06em; gap: 5px; min-height: 0; line-height: 1.6; }
+#badges #net-badge i { width: 12px; height: 12px; }
+/* Unleash banner: small, top-left, out of the way of the table. */
+#strike-banner { left: 12px; top: 64px; transform: none; padding: 6px 16px; max-width: 320px; align-items: flex-start; text-align: left; }
+#strike-banner b { font-size: 18px; } #strike-banner small { font-size: 11px; } #strike-banner .btn { padding: 3px 12px; font-size: 12px; }
+/* Requests counter beside the DM title: a small labelled plank, not a lone number. */
+#dm-panel .req-badge:not(:empty) { margin-left: 10px; margin-right: auto; height: auto; min-width: 0; padding: 0 8px; background: none; border: 5px solid transparent; border-width: 4px 10px;
+  border-image: var(--sk-btn-pri) 58 72 fill / 4px 10px / 0 stretch; font: 700 11px var(--font-head); color: #fff6e0; }
+/* Picture-only crops of lettered art: fade the cut edge so the art does not end in a hard line. */
+img.kit[src*="-sym."] { -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
+body #hud > #dice-tray.collapsed { box-shadow: none !important; outline: none; }
+
+/* Health bars slide to their new value. */
+.hpbar i[style*="--from"] { animation: hpSlide .6s ease-out; }
+@keyframes hpSlide { from { width: var(--from); } }
+@media (prefers-reduced-motion: reduce) { .hpbar i { animation: none !important; } }
+/* DM dock grows downward while the dice tray is hidden (T), and returns to its size when the tray is back. */
+body:has(#dice-tray.collapsed) #dm-panel:not(.expanded) { max-height: calc(100vh - 24px); }
+#dm-panel { transition: max-height .25s ease-out; }
+body:has(#dice-tray.collapsed) #dm-panel:not(.expanded) .gal-grid { max-height: none; }
+/* Top-right HUD: every pill the same small size as Mic off, two tidy rows that never overlap. */
+#badges { top: 10px !important; right: 12px !important; gap: 6px !important; align-items: center; }
+#badges span, #badges #net-badge, #hud > #hud-buttons button {
+  box-sizing: border-box; height: 26px; min-height: 0; padding: 0 6px; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+  font: 700 10px/1 var(--font-head); letter-spacing: .05em; border-width: 5px 10px; border-image-width: 5px 10px;
+}
+#badges #code-badge { letter-spacing: .08em; }
+#badges #net-badge i { width: 11px; height: 11px; }
+#hud > #hud-buttons { top: 42px !important; right: 12px !important; gap: 6px; }
+#hud > #hud-buttons button img, #hud > #hud-buttons button .kit { height: 14px; width: auto; }
+/* The badge's own text span is not a pill: no second frame inside "Hosting". */
+#badges #net-badge span { border: none; border-image: none; background: none !important; box-shadow: none; padding: 0; height: auto; display: inline; font: inherit; }
+
+/* Token HP: a plain thin red bar (no painted frame laid over it). */
+#tok-list .hpbar { height: 8px; min-width: 120px; padding: 0; border: none !important; border-image: none !important; border-radius: 4px; background: #3b1d12 !important; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.45); overflow: hidden; }
+#tok-list .hpbar i { border-radius: 4px; background: linear-gradient(180deg, #e8483a, #a8160e) !important; box-shadow: none; }
+#tok-list .hpbar.mid i { background: linear-gradient(180deg, #e8483a, #a8160e) !important; } #tok-list .hpbar.low i { background: linear-gradient(180deg, #b8281c, #6e0c08) !important; }
+
+/* Unleash banner: the text sits centred inside the red cloth, smaller, in the banner's own lettering. */
+#strike-banner { width: 300px; max-width: calc(100vw - 24px); box-sizing: border-box; align-items: center; text-align: center; border-width: 26px 62px 22px; border-image-width: 26px 62px 22px; padding: 0 2px 2px; gap: 1px; }
+#strike-banner b { font: 900 17px/1.1 var(--font-display); color: #fff2d4; text-shadow: 0 2px 0 #4a0f08; letter-spacing: .02em; }
+#strike-banner small { font: 600 11px/1.25 var(--font-body); color: #ffe6cf; text-shadow: 0 1px 0 #4a0f08; }
+#strike-banner .btn { margin-top: 3px; padding: 2px 12px; font-size: 11px; }
+
+/* Pop-up notices: the new parchment panel, no coloured box or plank inside. */
+.net-toast, .net-toast.leave, .net-toast.warn { background: none !important; border-radius: 0; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4); animation-name: toastIn;
+  border: 14px solid transparent; border-image: url('/assets/kit/ui/strike-panel.webp') 48 fill / 14px stretch; padding: 2px 10px; color: var(--ink-900); font: 700 13px var(--font-head); letter-spacing: .03em; }
+.net-toast.warn { color: #8e2a1a; } .net-toast.leave { color: #4a3020; }
+.net-toast span { background: none !important; border: none !important; border-image: none !important; box-shadow: none !important; padding: 0 !important; color: inherit !important; text-shadow: none !important; }
+.net-toast i { display: none; }

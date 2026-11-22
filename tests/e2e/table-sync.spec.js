@@ -115,11 +115,9 @@ test('host, join by code, build a character, and deal damage with a released str
     expect(await game(dm, (T) => T.dm.state.strikes.length)).toBe(0);
     await expect(pl.locator('#strike-banner')).toBeHidden();
 
-    // --- a player cannot release someone else's strike, or change their own hit points ---
+    // --- a creature's confirmed strike plays at once; the player never gets to release it ---
     await game(dm, (T, i) => T.dm.act('strike', { by: i.gob, targets: [{ id: i.pc, amount: 2 }] }), ids);
-    await expect.poll(() => game(pl, (T) => T.dm.state.strikes.length), { timeout: 15_000 }).toBe(1);
     expect(await game(pl, (T) => !!T.caster.armedStrike())).toBe(false);
-    await game(dm, (T) => T.dm.act('strike.now', { id: T.dm.state.strikes[0].id }));
     await expect.poll(() => game(pl, (T, id) => { const t = T.dm.tokens.find(id); return t.maxHp - t.hp; }, ids.pc), { timeout: 15_000 }).toBe(2);
     expect(errors).toEqual([]);
   } finally { await closeAll(dmCtx, plCtx); }

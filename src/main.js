@@ -172,7 +172,7 @@ grab.onEmptyGrab = (h) => {
   return dice.spawn(P.type, h.point);
 };
 // The DM's enemies are the DM's to move: players cannot pick up minis the table has locked (they can still ask).
-grab.canTake = (it) => !(it.kind === 'mini' && tableSync.role === 'player' && dm.state.settings?.lockEnemyMinis && dm.tokens.find(it.netKey)?.side === 'enemy');
+grab.canTake = (it) => !(it.kind === 'mini' && tableSync.role === 'player' && dm.tokens.find(it.netKey)?.side === 'enemy'); // only the DM moves enemy minis
 mouse.addTool({ priority: true, enabled: () => dm.isDM && dm.state.map.fogPaint && table.fog.visible, targets: () => [table.fog],
   onDown: (h) => table.revealUV(h.uv.x, h.uv.y), onDrag: (h) => table.revealUV(h.uv.x, h.uv.y) });
 mouse.addTool({ enabled: () => !dice.locked, targets: () => [table.pouch], onDown: () => dice.toss(dice.spawn(DICE_POUCH.type)) });
@@ -325,14 +325,15 @@ $('cheatsheet').onclick = (e) => { if (e.target.id === 'cheatsheet' || e.target.
 const TYPING = 'input, select, textarea, [contenteditable]';
 const PANELS = '#dm-panel, #dice-tray, #creature-editor, #cheatsheet, #char-sheet, #lobby, #call-desk';
 addEventListener('keydown', (e) => {
-  if (!started || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (!started || e.ctrlKey || e.metaKey) return;
   const t = e.target instanceof Element ? e.target : null;
   if (t?.closest(TYPING)) return; // QA S3: never while typing in any field
-  const k = e.key.toLowerCase();
+  const k = e.key.toLowerCase(), digit = /^Digit[1-6]$/.test(e.code) ? Number(e.code.slice(5)) : 0;
+  if (e.altKey) { if (digit && dm.isDM) { e.preventDefault(); panel.showTab(digit - 1); } return; } // Alt+1-6: DM dock tabs
+  if (digit && !e.shiftKey) { if (!dice.locked) dice.toss(dice.spawn(DIE_TYPES[digit - 1])); return; } // 1-6: a d4-d20 onto the board (DM too)
   // Dock / help keys work from inside the panels; game keys do not (a focused button would also eat Space).
   if (e.key === '?' || k === 'h') { toggleCheat(); return; }
   if (k === 'escape') { toggleCheat(false); return; }
-  if (k >= '1' && k <= '6' && dm.isDM && !e.shiftKey) { panel.showTab(+k - 1); return; }
   if (k === 'm' && dm.isDM && e.shiftKey) { panel.toggle(true); panel.expand(); return; } // expand / shrink the DM panel
   if (k === 'm' && dm.isDM) { panel.toggle(); return; }
   if (k === 'k') { charSheet.toggle(); return; }
@@ -343,7 +344,6 @@ addEventListener('keydown', (e) => {
   if (k === 'v') { voice.pushToTalk(true); return; }
   if (t?.closest(PANELS)) return;
   if (k === ' ') { e.preventDefault(); dice.rollAll(); }
-  else if (k >= '1' && k <= '6' && !e.shiftKey) { if (!dice.locked) dice.toss(dice.spawn(DIE_TYPES[+k - 1])); }
   else if (k === 'c') dice.clear();
   else if (k === 'f' && dm.isDM) dm.toggleFogPaint();
   else if (k === 'p' && tableSync.role !== 'player') dm.setRole(dm.isDM ? 'player' : 'dm');

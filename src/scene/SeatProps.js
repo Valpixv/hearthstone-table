@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { TABLE_TOP } from '../physics/Physics.js';
+import { TABLE_TOP, TABLE } from '../physics/Physics.js';
+import { MAP } from '../table/layout.js';
 import { place } from './assets.js';
 import { drawFrame, drawKit, kitHas, onKitLoad } from '../ui/kit.js';
 import { drawIcon, onIconsReady } from '../ui/icons.js';
@@ -9,7 +10,7 @@ import { ABILITIES, abilityMod, fmtMod, defaultSheet, classId } from '../party/s
 import CLASSES from '../data/classes.json';
 
 /** Size of the card on the table (metres) and how close a fingertip must come to open it. */
-export const SEAT_PROPS = { cardW: 0.15, cardH: 0.21, tilt: 0.42, touch: 0.035, cooldown: 0.8, bagScale: 0.75 };
+export const SEAT_PROPS = { cardW: 0.15, cardH: 0.21, tilt: 0.42, touch: 0.035, cooldown: 0.8, bagScale: 0.58 };
 const CW = 600, CH = 840;
 
 /** Kit portrait key for a character (class portrait, else the class's hero model). Pure. */
@@ -18,6 +19,39 @@ export function portraitKey(token) {
   if (id && kitHas(`creature/${id}`)) return `creature/${id}`;
   const m = id ? CLASSES[id].model : token?.model;
   return m && kitHas(`creature/${m}`) ? `creature/${m}` : null;
+}
+
+/** Table dressing that stays put (TableProps): the corner candles and the coin pile, as [x, z, radius]. */
+const CX = TABLE.w / 2 - 0.07, CZ = TABLE.d / 2 - 0.07;
+const FIXED = [[-CX, -CZ, 0.12], [CX, -CZ, 0.12], [-CX, CZ, 0.08], [CX, CZ, 0.08], [-CX + 0.1, -CZ + 0.02, 0.12]];
+
+/**
+ * The nearest spot to `want` along the seat's table edge where a round prop of radius r touches nothing:
+ * not the fixed dressing, not the seat's dice tray, not the props already placed (`taken`: [x, z, r]).
+ */
+export function freeSpot(L, want, r, taken) {
+  const hw = TABLE.w / 2 - r - 0.02, hd = TABLE.d / 2 - r - 0.02;
+  const ok = ([x, z]) => {
+    if (Math.abs(x) > hw || Math.abs(z) > hd) return false;
+    if (FIXED.some(([fx, fz, fr]) => Math.hypot(x - fx, z - fz) < fr + r)) return false;
+    if (Math.abs(x - MAP.x) < MAP.w / 2 + r && Math.abs(z - MAP.z) < MAP.d / 2 + r) return false; // the battle mat
+    if (taken.some(([tx, tz, tr]) => Math.hypot(x - tx, z - tz) < tr + r)) return false;
+    const dx = x - L.tray.x, dz = z - L.tray.z;
+    const lat = dx * L.right[0] + dz * L.right[1], dep = dx * L.fwd[0] + dz * L.fwd[1];
+    return !(Math.abs(lat) < L.tray.w / 2 + r && Math.abs(dep) < L.tray.d / 2 + r);
+  };
+  const clampIn = ([x, z]) => [Math.max(-hw, Math.min(hw, x)), Math.max(-hd, Math.min(hd, z))];
+  const start = clampIn(want);
+  if (ok(start)) return start;
+  for (let step = 0; step < 1.2; step += 0.02) {
+    for (const dep of [0, 0.06, -0.06, 0.12, 0.18]) { // slide along the edge first, then a little toward the middle
+      for (const sgn of [-1, 1]) {
+        const p = clampIn([want[0] + L.right[0] * step * sgn + L.fwd[0] * dep, want[1] + L.right[1] * step * sgn + L.fwd[1] * dep]);
+        if (ok(p)) return p;
+      }
+    }
+  }
+  return start;
 }
 
 /**
@@ -55,10 +89,13 @@ export class SeatProps {
 
   /** Puts the card and the satchel in front of a seat (from seatLayout()). */
   setSeat(L) {
-    this.card.position.set(L.card.x, TABLE_TOP, L.card.z); this.card.rotation.y = L.card.yaw;
-    // The satchel sits on the other side of the tray, toward the player's edge.
+    // The card goes left of the tray and the satchel right of it, each slid along the table edge until it
+    // clears the corner candles and coins, the tray and the other prop.
+    const card = freeSpot(L, [L.card.x, L.card.z], 0.1, []);
+    this.card.position.set(card[0], TABLE_TOP, card[1]); this.card.rotation.y = L.card.yaw;
     const bx = L.tray.x + L.right[0] * (L.tray.w / 2 + 0.1) - L.fwd[0] * 0.02, bz = L.tray.z + L.right[1] * (L.tray.w / 2 + 0.1) - L.fwd[1] * 0.02;
-    this.bag.position.set(Math.max(-0.76, Math.min(0.76, bx)), TABLE_TOP, Math.max(-0.58, Math.min(0.58, bz))); this.bag.rotation.y = L.yaw + 0.4;
+    const bag = freeSpot(L, [bx, bz], 0.14, [[card[0], card[1], 0.1]]);
+    this.bag.position.set(bag[0], TABLE_TOP, bag[1]); this.bag.rotation.y = L.yaw + 0.4;
     this.refresh();
   }
 

@@ -131,7 +131,7 @@ export class LifeDrag {
     if (yaw != null) patch.lifeYaw = +yaw.toFixed(3);
     Object.assign(t, patch);
     if (this.dm.act) this.dm.act('update', { id, patch }); else this.dm.emit();
-    if (moveMini && this.dm.state.settings?.linkMiniToBody && this.dm.tokens.refs[id]?.item) {
+    if (moveMini && this.dm.tokens.refs[id]?.item) { // a mini and its life-size body always move together
       const [mx, mz] = arenaToBoard(x, z);
       if (this.sync?.moveToken) this.sync.moveToken(id, mx, mz); else { const b = this.dm.tokens.refs[id].item.body; b.position.x = mx; b.position.z = mz; }
     }
@@ -140,7 +140,7 @@ export class LifeDrag {
   /** A mini settled on the mat: with the link on, its life-size body walks to the matching spot in the room. */
   onMiniMoved(id, x, z) {
     const T = this.dm.tokens, t = T?.find(id), L = T?.refs[id]?.life;
-    if (!t || !L || !this.dm.state.settings?.linkMiniToBody || this.drag?.id === id) return;
+    if (!t || !L || this.drag?.id === id) return;
     if (Math.abs(x - MAP.x) > MAP.w / 2 || Math.abs(z - MAP.z) > MAP.d / 2) return; // off the mat: leave the body alone
     const [ax, az] = boardToArena(x, z), [fx, fz] = nearestFree(ax, az, creatureRadius(t), this.others(id));
     if (Math.hypot(fx - L.position.x, fz - L.position.z) < 0.15) return;

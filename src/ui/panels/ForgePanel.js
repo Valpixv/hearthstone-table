@@ -3,7 +3,7 @@
 import { guessStat } from '../../combat/CombatManager.js';
 import { templateDef } from '../../tokens/TokenManager.js';
 import { esc } from '../actions.js';
-import { kitIcon } from '../kit.js';
+import { kitIcon, symKey } from '../kit.js';
 
 export const FORGE_NOTE = 'AI Forge: suggested numbers from the closest template. Change anything, then Spawn.';
 
@@ -20,7 +20,7 @@ export function forgePanel(root, ui) {
       <p class="hint">Describe a creature. You approve the picture before it becomes a model.</p>
       <div class="row"><input id="forge-prompt" placeholder="e.g. a hulking moss troll with a stone club" autocomplete="off"/><button id="forge-go" class="kimg" title="Generate a picture">${kitIcon('forge/generate')}<span class="art-caption">Generate</span></button></div>
       <div id="forge-draft" hidden><img id="forge-img" alt="AI draft"/>
-        <div class="row forge-acts"><button id="forge-ok" class="kimg" title="Approve: make it a creature">${kitIcon('forge/approve')}<span class="art-caption">Approve</span></button><button id="forge-again" class="kimg" title="Regenerate the picture">${kitIcon('forge/regenerate')}<span class="art-caption">Regenerate</span></button><button id="forge-no" class="kimg" title="Discard">${kitIcon('forge/discard')}<span class="sr-only">Discard</span></button></div></div>
+        <div class="row forge-acts"><button id="forge-ok" class="btn ok" title="Approve: make it a creature">${kitIcon(symKey('forge/approve'), { cls: 'fa-ic' })}<span>Approve</span></button><button id="forge-again" title="Regenerate the picture">${kitIcon(symKey('forge/regenerate'), { cls: 'fa-ic' })}<span>Regenerate</span></button><button id="forge-no" title="Discard this picture">${kitIcon(symKey('forge/discard'), { cls: 'fa-ic' })}<span>Discard</span></button></div></div>
       <div id="forge-status" class="hint" role="status"></div></section>
     <section><h4>Forged creatures <button id="forge-clear" class="small" title="Remove every AI Forge creature from the table">Clear from table</button></h4>
       <p class="hint">They also appear in the Creatures gallery under “AI Forge”.</p>

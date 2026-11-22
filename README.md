@@ -1,7 +1,5 @@
 # Hearthstone Table
 
-[![tests](https://github.com/Valpixv/hearthstone-table/actions/workflows/test.yml/badge.svg)](https://github.com/Valpixv/hearthstone-table/actions/workflows/test.yml)
-
 **A browser-based VR tabletop for Dungeons & Dragons, played with your own hands.**
 
 Hearthstone Table gives a Dungeon Master (DM) and players room to create with AI generation, and it keeps them physically involved through hand tracking. The DM hosts a table and players join with a six-letter code. Each player builds a D&D 2024 character sheet, then puts on a Meta Quest and sits at one shared table. In combat the DM calls for a roll, the player throws the dice with their own tracked hands, the DM confirms the result, and the player releases the attack with a hand sign. The DM runs the world live with life-size animated creatures, AI-generated monsters, 3D scenes, weather, music and narration.
@@ -310,10 +308,10 @@ npm run test:e2e
 | Suite | What it covers | Result |
 |---|---|---|
 | **Unit tests** (Vitest, 21 files) | Rules, the character sheet, the builder, rooms and codes, the call → roll → confirm → release loop, the arena, gesture recognition, recordings and replays, requests, tokens, dice faces, MediaPipe conversion | **435 passing** |
-| **Browser end-to-end tests** (Playwright, 26 tests in 9 files) | Host → join → build → begin → call → roll → confirm → release in two browsers; rejoining from a second device; the DM's critical path; the sheet; the Forge; the headset interface on the emulated Quest; every hand sign through the real gesture pipeline with synthetic hands; webcam hands; voice between two browsers with fake microphones | Passing |
+| **Browser end-to-end tests** (Playwright, 26 tests in 9 files) | Host → join → build → begin → call → roll → confirm → release in two browsers; rejoining from a second device; the DM's critical path; the sheet; the Forge; the headset interface on the emulated Quest; every hand sign through the real gesture pipeline with synthetic hands; webcam hands; voice between two browsers with fake microphones | All 26 pass on a laptop with a graphics card (`E2E_GPU=1`) |
 | **Multiplayer soak** | One DM and three players for 60 minutes: 719 rounds, 2,157 snapshot and roll deliveries, 59 reconnects | Every seat, identity and roll kept |
 | **Hand-sign matrix** | 1,416 synthetic gesture cases across hands, speeds and frame rates | 624 of 672 clean cases recognised; tuning is the next milestone |
-| **Continuous integration** | GitHub Actions runs the unit and browser suites on every push | See the badge at the top |
+| **Continuous integration** | GitHub Actions runs the unit and browser suites on every push | Unit tests and 21 of 26 browser tests pass there; the 5 tests that run several 3D browsers at once are too heavy for GitHub's machines without a graphics card and are checked locally |
 
 The browser tests need Playwright's Chromium once (the install line above). Set `E2E_GPU=1` to run the browser tests on the graphics card (much faster on a laptop). Recorded-hand replays are described in [harness/README.md](harness/README.md).
 

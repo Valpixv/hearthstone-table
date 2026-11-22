@@ -10,7 +10,7 @@ import { ABILITIES, abilityMod, fmtMod, defaultSheet, classId } from '../party/s
 import CLASSES from '../data/classes.json';
 
 /** Size of the card on the table (metres) and how close a fingertip must come to open it. */
-export const SEAT_PROPS = { cardW: 0.15, cardH: 0.21, tilt: 0.42, touch: 0.035, cooldown: 0.8, bagScale: 0.58 };
+export const SEAT_PROPS = { cardW: 0.15, cardH: 0.21, tilt: 0.42, touch: 0.035, cooldown: 0.8, bagScale: 0.58, dwell: 0.4 };
 const CW = 600, CH = 840;
 
 /** Kit portrait key for a character (class portrait, else the class's hero model). Pure. */
@@ -131,17 +131,28 @@ export class SeatProps {
     this.tex.needsUpdate = true;
   }
 
-  /** Per frame: a fingertip on the card or in the satchel opens its panel. @param {object[]} hands HandState[] */
+  /**
+   * Per frame: a fingertip RESTING on the card or in the satchel (SEAT_PROPS.dwell seconds) opens its panel.
+   * A hand passing through on its way to the dice never counts, nor does a webcam hand (its depth is only an
+   * estimate: those players click the card or satchel, or press K). After opening, the finger must leave before it can open again.
+   * @param {object[]} hands HandState[]
+   */
   update(hands, dt) {
-    this.cool -= dt; if (!this.root.visible || this.cool > 0) return;
-    const c = new THREE.Vector3(), p = new THREE.Vector3();
+    this.cool -= dt; this.dwell ||= { sheet: 0, bag: 0 }; this.rearm ||= { sheet: true, bag: true };
+    if (!this.root.visible) return undefined;
+    const c = new THREE.Vector3(), p = new THREE.Vector3(), inside = { sheet: false, bag: false };
     for (const h of hands || []) {
-      const tip = h.joints?.['index-finger-tip']?.p; if (!tip || h.grabbing) continue;
+      const tip = h.joints?.['index-finger-tip']?.p; if (!tip || h.grabbing || h.source === 'webcam') continue;
       p.set(...tip);
       this.card.getWorldPosition(c); c.y += SEAT_PROPS.cardH * 0.4;
-      if (Math.abs(p.x - c.x) < SEAT_PROPS.cardW * 0.6 && Math.abs(p.z - c.z) < 0.07 && Math.abs(p.y - c.y) < SEAT_PROPS.cardH * 0.55) { this.cool = SEAT_PROPS.cooldown; return this.onOpen('sheet'); }
+      if (Math.abs(p.x - c.x) < SEAT_PROPS.cardW * 0.6 && Math.abs(p.z - c.z) < 0.07 && Math.abs(p.y - c.y) < SEAT_PROPS.cardH * 0.55) inside.sheet = true;
       this.bag.getWorldPosition(c); c.y += 0.07;
-      if (p.distanceTo(c) < 0.08 + SEAT_PROPS.touch) { this.cool = SEAT_PROPS.cooldown; return this.onOpen('bag'); }
+      if (p.distanceTo(c) < 0.08 + SEAT_PROPS.touch) inside.bag = true;
+    }
+    for (const k of ['sheet', 'bag']) {
+      if (!inside[k]) { this.dwell[k] = 0; this.rearm[k] = true; continue; }
+      this.dwell[k] += dt;
+      if (this.rearm[k] && this.cool <= 0 && this.dwell[k] >= SEAT_PROPS.dwell) { this.rearm[k] = false; this.cool = SEAT_PROPS.cooldown; return this.onOpen(k); }
     }
     return undefined;
   }

@@ -26,3 +26,28 @@ describe('seat props placement', () => {
     });
   }
 });
+
+describe('seat props touch', async () => {
+  const THREE = await import('three');
+  const { SeatProps, SEAT_PROPS } = await import('../../src/scene/SeatProps.js');
+  const at = (x, y, z) => ({ getWorldPosition: (v) => v.set(x, y, z) });
+  const fake = () => { const opened = []; return { opened, root: { visible: true }, cool: 0, card: at(0, 0.78, 0.5), bag: at(0.4, 0.78, 0.45), onOpen: (k) => opened.push(k) }; };
+  const finger = (x, y, z, source = 'xr') => [{ source, grabbing: false, joints: { 'index-finger-tip': { p: [x, y, z] } } }];
+  const cardTip = () => finger(0, 0.78 + SEAT_PROPS.cardH * 0.4, 0.5);
+  const run = (f, hands, seconds) => { for (let t = 0; t < seconds; t += 0.05) SeatProps.prototype.update.call(f, hands, 0.05); };
+
+  it('a finger passing through the card does not open the sheet', () => {
+    const f = fake(); run(f, cardTip(), 0.2); run(f, finger(1, 1, 1), 0.5); expect(f.opened).toEqual([]);
+  });
+  it('a finger resting on the card opens the sheet once', () => {
+    const f = fake(); run(f, cardTip(), 2); expect(f.opened).toEqual(['sheet']);
+  });
+  it('webcam hands never open the card or satchel', () => {
+    const f = fake(); run(f, finger(0, 0.78 + SEAT_PROPS.cardH * 0.4, 0.5, 'webcam'), 2); expect(f.opened).toEqual([]);
+  });
+  it('the finger must leave before the sheet can open again', () => {
+    const f = fake(); run(f, cardTip(), 3); expect(f.opened).toEqual(['sheet']);
+    run(f, finger(1, 1, 1), 0.2); run(f, cardTip(), 1); expect(f.opened).toEqual(['sheet', 'sheet']);
+  });
+  void THREE;
+});

@@ -96,15 +96,26 @@ export class Caster {
       const r = this.trackers[side].update(h.joints, dt, { blocked });
       const bound = r.armed && (strike || this.bindings.some((b) => (FIRES_AS[r.armed] || [r.armed]).includes(b.gesture)));
       // Aim with the hand's stable pointing ray (the Quest's own hand ray) rather than the shaky finger bones.
-      const ray = !blocked && this.aimRay?.(side), aim = ray ? { origin: ray.origin.toArray(), dir: ray.dir.toArray() } : r.aim;
+      // Without the headset's hand ray, the open-hand signs (palm, slash) aim from your eyes through your hand: their
+      // own bone directions (palm facing, finger line) are guesses from a 2D camera and swing up and down.
+      const ray = !blocked && this.aimRay?.(side), open = (g) => g === 'palm' || g === 'slash';
+      const aim = ray ? { origin: ray.origin.toArray(), dir: ray.dir.toArray() } : open(r.armed) ? this.eyeAim(r.aim) : r.aim;
       this.showAim(side, bound ? aim : null, strike);
       if (r.fire) {
-        const b = this.bindings.find((x) => x.gesture === r.fire.gesture), o = ray ? aim.origin : r.fire.origin, d = ray ? aim.dir : r.fire.dir; // the fired sign's own aim without a ray (a slash aims along the fingers)
+        const fa = ray ? aim : open(r.fire.gesture) ? this.eyeAim(r.fire) : r.fire;
+        const b = this.bindings.find((x) => x.gesture === r.fire.gesture), o = fa.origin, d = fa.dir;
         if (strike) this.tryRelease(strike, b, o, d);
         else if (b) this.castAlong(b, o, d);
       }
     }
     for (const side of ['left', 'right']) if (!seen.has(side)) { this.trackers[side].update(null, dt); this.showAim(side, null); }
+  }
+
+  /** An aim that starts at the hand and points the way the eye looks through it (null in, null out). */
+  eyeAim(a) {
+    if (!a?.origin || !this.camera) return a;
+    const eye = this.camera.getWorldPosition(new THREE.Vector3()), o = new THREE.Vector3(...a.origin), d = o.clone().sub(eye);
+    return d.lengthSq() < 1e-6 ? a : { origin: a.origin, dir: d.normalize().toArray() };
   }
 
   /** Points of a strike's targets (life-size body first, else the mini). */

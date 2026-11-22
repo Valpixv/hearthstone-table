@@ -17,7 +17,7 @@ export class InputManager {
     this.jointSource = null; this.pointerSources = [];
     this.prev = {}; this.hands = [];
     this.tipBodies = {};
-    this.visuals = { left: makeHandMesh('#f2c9a0'), right: makeHandMesh('#f2c9a0') };
+    this.visuals = { left: makeHandMesh('#ffffff'), right: makeHandMesh('#ffffff') };
     scene.add(this.visuals.left, this.visuals.right);
     this.handMeshes = new HandMeshes(scene); // skinned hands; the joint spheres are the fallback
     this.tipsEnabled = true;
@@ -42,7 +42,7 @@ export class InputManager {
         const pinching = isPinching(j, prev.pinching);
         const fist = !pinching && isFist(j);
         const st = {
-          id: hd, handedness: hd, joints: j, pinching, fist, grabbing: pinching || fist,
+          id: hd, handedness: hd, joints: j, pinching, fist, grabbing: pinching || fist, source: this.jointSource.kind || 'xr',
           point: grabPoint(j), palmUp: palmUp(j, hd),
           tips: TIP_JOINTS.map((n) => j[n]?.p).filter(Boolean),
         };
@@ -82,7 +82,7 @@ export class InputManager {
 }
 
 function makeHandMesh(color) {
-  const m = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 8), new THREE.MeshStandardMaterial({ color, roughness: 0.6 }), JOINTS.length);
+  const m = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 8), new THREE.MeshStandardMaterial({ color, roughness: 0.6, emissive: color, emissiveIntensity: 0.45 }), JOINTS.length);
   m.count = 0; m.frustumCulled = false; m.castShadow = true;
   m.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(JOINTS.length * 3).fill(1), 3);
   return m;

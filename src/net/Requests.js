@@ -212,9 +212,8 @@ export class Requests {
     if (this.queue.filter((r) => r.from === from).length >= NET.queueMaxPerPlayer) { this.anomaly(`queue full for ${name}`); return this.reply(from, m.rid, 'denied', { reason: 'Too many requests waiting.' }); }
     const r = { rid: m.rid, from, name, type: m.type, payload: m.payload || {}, roll: m.roll || null, at: this.now() };
     r.label = describeRequest(r.type, r.payload, this.tokens);
-    // A player's own hit points (damage, healing, temp HP on their own character) apply at once, like their bag.
-    const ownHp = (r.type === 'hp' || r.type === 'tempHp') && this.tokens.find((t) => t.id === r.payload?.id)?.owner === from;
-    if (SELF_SERVE.has(r.type) || ownHp || this.settings.autoApprove[r.type] || this.allowed(from)) return this.run(r, null);
+    // Hit points (damage, healing, temp HP), the player's own included, always wait for the DM unless the DM auto-approves them.
+    if (SELF_SERVE.has(r.type) || this.settings.autoApprove[r.type] || this.allowed(from)) return this.run(r, null);
     this.queue.push(r); this.toast(`📨 ${name} asks: ${r.label}`, 'join'); this.changed();
   }
 

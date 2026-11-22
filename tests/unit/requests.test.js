@@ -46,11 +46,18 @@ describe('validation (on the DM machine)', () => {
 });
 
 describe('queue: approve, edit & approve, deny', () => {
-  it('a player changing their own hit points applies at once, with no approval card', () => {
+  it('a player changing their own hit points waits for the DM, then applies directly (no self-strike)', () => {
     const s = setup(); const before = s.aria.hp;
     s.dm.strikes = s.dm.strikes || {}; s.dm.state.settings = { ...(s.dm.state.settings || {}), gestureRelease: true }; // the strike path is live
     s.R.receive(req('hp', { id: s.aria.id, expr: '-2' }, 'p1', 'own'), { name: 'Aria' });
-    expect(s.R.queue).toHaveLength(0); expect(s.aria.hp).toBe(before - 2);
+    expect(s.R.queue).toHaveLength(1); expect(s.aria.hp).toBe(before);
+    s.R.approve('own'); expect(s.aria.hp).toBe(before - 2);
+  });
+  it('a player healing themselves waits for the DM too', () => {
+    const s = setup(); s.aria.hp = 5;
+    s.R.receive(req('hp', { id: s.aria.id, expr: '+4' }, 'p1', 'heal'), { name: 'Aria' });
+    expect(s.R.queue).toHaveLength(1); expect(s.aria.hp).toBe(5);
+    s.R.approve('heal'); expect(s.aria.hp).toBe(9);
   });
   it('queues, then approve executes and notifies', () => {
     const s = setup(); s.R.receive(req('hp', { id: s.gob.id, expr: '-5' }, 'p1', 'a'), { name: 'Aria' });

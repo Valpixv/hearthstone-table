@@ -562,3 +562,15 @@ body:has(#dice-tray.collapsed) #dm-panel:not(.expanded) .gal-grid { max-height: 
 .net-toast.warn { color: #8e2a1a; } .net-toast.leave { color: #4a3020; }
 .net-toast span { background: none !important; border: none !important; border-image: none !important; box-shadow: none !important; padding: 0 !important; color: inherit !important; text-shadow: none !important; }
 .net-toast i { display: none; }
+/* Character sheet: same width, but runs down to near the bottom of the screen (over the spell bar and dice tray). */
+#char-sheet { height: calc(100vh - 24px); max-height: calc(100vh - 24px); z-index: 43; }
+
+/* Table tab roster: each player row is a painted panel like the other HUD cards, not a flat box; Unlock and Kick are real buttons. */
+.st-roster li, .st-roster li.ok { background: none !important; border-radius: 0; border: 12px solid transparent; border-image: var(--kit-panel) 30% fill / 12px / 2px stretch; padding: 0 2px; }
+.st-roster li.ok { filter: drop-shadow(0 0 4px var(--leaf-300)); }
+.st-roster li button.small { white-space: nowrap; }
+.st-roster li button.st-kick { border-image-source: var(--sk-btn-pri); color: #fff6e0; }
+.st-roster li { flex-wrap: wrap; row-gap: 2px; } .st-roster li > span { flex: 1 1 100%; } .st-roster li > small, .st-roster li > em { white-space: nowrap; } .st-roster li > em { margin-right: auto; }
+.st-roster li > span.st-acts { flex: 0 0 auto; display: flex; gap: 3px; margin-left: auto; }
+/* A roll result (often rolled from the sheet) sits above the tall character sheet until it is dismissed. */
+#hud > #dice-tray:has(#dt-card:not([hidden])) { z-index: 44; }

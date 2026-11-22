@@ -13,7 +13,7 @@ const _m = new THREE.Matrix4(), _p = new THREE.Vector3(), _q = new THREE.Quatern
 const isIdentity = (q) => !q || (Math.abs(q[0]) < 1e-6 && Math.abs(q[1]) < 1e-6 && Math.abs(q[2]) < 1e-6);
 
 export class HandMeshes {
-  constructor(scene, { color = '#e9b796' } = {}) {
+  constructor(scene, { color = '#ffffff' } = {}) {
     this.hands = {};
     this.ready = false;
     const loader = new GLTFLoader();
@@ -24,7 +24,7 @@ export class HandMeshes {
         if (!o.isMesh) return;
         o.frustumCulled = false;
         o.castShadow = true;
-        o.material = new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness: 0 });
+        o.material = new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness: 0, emissive: color, emissiveIntensity: 0.45 }); // reads as pure white even in the dim tavern light
       });
       const bones = JOINT_NAMES.map((n) => root.getObjectByName(n) ?? null);
       scene.add(root);

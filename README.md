@@ -28,7 +28,7 @@ Hearthstone Table gives a Dungeon Master (DM) and players room to create with AI
 14. [Testing and quality (for developers)](#testing-and-quality-for-developers)
 15. [How it is built (for developers)](#how-it-is-built-for-developers)
 16. [Troubleshooting](#troubleshooting)
-17. [Copyright and credits](#copyright-and-credits)
+17. [Credits](#credits)
 
 ---
 
@@ -366,8 +366,6 @@ docs/     Field Guide (PDF) · screenshots/
 
 ---
 
-## Copyright and credits
-
-Copyright © 2026 Valpixv. All rights reserved. The source is published here so it can be viewed and demonstrated; no licence to copy, modify or redistribute it is granted.
+## Credits
 
 Third-party models, skies, textures, controller profiles, fonts, libraries and rules text keep their own licences (CC0, MIT, SIL OFL, W3C and CC BY 4.0); every source and its required attribution is listed in [ASSETS.md](ASSETS.md).

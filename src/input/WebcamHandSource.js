@@ -20,7 +20,7 @@ const MAP = {
 };
 
 export class WebcamHandSource {
-  constructor({ onStatus } = {}) { this.onStatus = onStatus || (() => {}); this.last = {}; this.lastTime = -1; }
+  constructor({ onStatus } = {}) { this.kind = 'webcam'; this.onStatus = onStatus || (() => {}); this.last = {}; this.lastTime = -1; }
 
   async load() {
     this.onStatus('Starting webcam…');
